@@ -7,45 +7,43 @@
 		<link href="css/style.css" rel="stylesheet">
 	</head>
 	<body>
-		<input type="text" id="iptCoragem" placeholder="Digite o quanto voce tem de coragem">
-		<input type="text" id="iptInteligencia" placeholder="Digite o quanto voce tem de inteligencia">
-		<input type="text" id="iptSensibilidade" placeholder="Digite o quanto voce tem de iptSensibilidade">
-		<input type="text" id="iptTemperamento" placeholder="Digite o quanto voce tem de temperamento">
-
-		<button onclick="teste()">Teste de personalidade</button>
+		<div class="mainContent">
+			<input type="number" id="iptCoragem" placeholder="Digite o quanto voce tem de coragem">
+			<input type="number" id="iptInteligencia" placeholder="Digite o quanto voce tem de inteligencia">
+			<input type="number" id="iptSensibilidade" placeholder="Digite o quanto voce tem de sensibilidade">
+			<input type="number" id="iptTemperamento" placeholder="Digite o quanto voce tem de temperamento">
+			<button onclick="teste()">Teste de personalidade</button>
+		</div>
 		<div id="resultado"></div>
 	
 	</body>
 	<script>
-	function teste(){
-		let coragem = Number(iptCoragem.value);
-		let inteligencia = Number(iptInteligencia.value);
-		let sensibilidade = Number(iptSensibilidade.value);
-		let temperamento = Number(iptTemperamento.value);
+		function teste(){
+			let coragem = Number(iptCoragem.value);
+			let inteligencia = Number(iptInteligencia.value);
+			let sensibilidade = Number(iptSensibilidade.value);
+			let temperamento = Number(iptTemperamento.value);
 
-		if((inteligencia >= 8 && coragem >= 7 && temperamento <= 6)|| (inteligencia > coragem && inteligencia > sensibilidade)){
-				resultado.innerHTML = `<p style='color:white;'>Você é a florzinha</p>`;
+			if((inteligencia >= 8 && coragem >= 7 && temperamento <= 6) || 
+				 (inteligencia > coragem && inteligencia > sensibilidade)){
+
+				resultado.innerHTML = `<img src="img/florzinha.gif">`;
+				resultado.innerHTML += `<p style='color:#C2185B;'>Você é a florzinha</p>`;
 				document.body.style.backgroundColor = 'pink';
-				resultado.innerHTML += `<img src="img/florzinha.gif" alt="">`
+			}
+			else if((sensibilidade >= 8 && temperamento <= 5) || 
+							(sensibilidade > inteligencia && sensibilidade > coragem)){
+
+				resultado.innerHTML = `<img src="img/lindinha.gif">`;
+				resultado.innerHTML += `<p style='color:blue;'>Você é a lindinha</p>`;
+				document.body.style.backgroundColor = '#4FC3F7';
+			}
+			else{
+
+				resultado.innerHTML = `<img src="img/docinho.gif">`;
+				resultado.innerHTML += `<p style='color:green;'>Você é a docinho</p>`;
+				document.body.style.backgroundColor = '#66BB6A';
+			}
 		}
-		if((sensibilidade >= 8 && temperamento<= 5)|| (sensibilidade > inteligencia && sensibilidade > coragem)){
-				resultado.innerHTML = `<p style='color:white;'>Você é a lindinha</p>`;
-				document.body.style.backgroundColor = 'blue';
-				resultado.innerHTML += `<img src="img/lindinha.gif" alt="">`
-		}
-		else{
-			resultado.innerHTML = `<p style='color:white';>Você é a docinho</p>`;
-				document.body.style.backgroundColor = 'green';
-				resultado.innerHTML += `<img src="img/docinho.gif" alt="">`
-		}
-		// if(coragem >= 8 && temperamento >= 7){
-		// 	resultado.innerHTML = `<p style='color:green';>Você é a docinho</p>`;
-		// }
-	}
 	</script>
-	<style>
-		input{
-			width: 400px;
-		}
-	</style>
 </html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+		<link href="css/style.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-image: url(fundoScoob.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>
+
+<!-- style="background-color: rgb(156, 157, 169); padding: 20px; width: 30%; border-radius: 20px;" -->
+<body id="container_global">
+    <h1 style="color: white;">Teste de personalidade do Scooby-Doo</h1>
+    <div class="mainContent">
+        <input type="text" id="coragem" placeholder="Coloque sua coragem:">
+        <input type="text" id="inteligencia" placeholder="Coloque sua inteligencia:">
+        <input type="text" id="curiosidade" placeholder="Coloque sua curiosidade:">
+        <input type="text" id="fome" placeholder="Coloque seu fome:">
+        <button onclick="analisar()">Verificar</button>
+    </div>
+    <br>
+    <br>
+    <div id="mensagem"></div>
+</body>
+<script>
+    function analisar() {
+        let coragemValue = coragem.value;
+        let inteligenciaValue = inteligencia.value;
+        let curiosidadeValue = curiosidade.value;
+        let fomeValue = fome.value;
+        let perfil;
+
+        if (inteligenciaValue >= 8 && coragemValue <= 3 && curiosidadeValue >= 8) {
+            perfil = '🧠Velma';
+            mensagem.style = "background-color: rgb(255, 170, 0); border-radius: 20px; padding: 40px;"
+            mensagem.innerHTML = `<img src="scooby_doo/velma.gif" alt=""><br>`
+        } else if (coragemValue >= 8 && inteligenciaValue <= 5 && curiosidadeValue > 6) {
+            perfil = '😎Fred'
+            mensagem.style = "background-color: blue; border-radius: 20px; padding: 40px;"
+            mensagem.innerHTML = `<img src="scooby_doo/fred.gif" alt=""><br>`
+        } else if (coragemValue < 3 && fomeValue > 8) {
+            perfil = '🍔Salsicha'
+            mensagem.style = "background-color: brown; border-radius: 20px; padding: 40px;"
+            mensagem.innerHTML = `<img src="scooby_doo/salsicha.gif" alt=""><br>`
+        } else if (curiosidadeValue >= 5 && inteligenciaValue >= 5 && curiosidadeValue >= 5) {
+            perfil = '💜 Daphne'
+            mensagem.style = "background-color: rgb(170, 4, 165); border-radius: 20px; padding: 40px;"
+            mensagem.innerHTML = `<img src="scooby_doo/dafne.gif" alt=""><br>`
+        } else {
+            perfil = '🍔Scooby-Doo'
+            mensagem.style = "background-color: darkred; border-radius: 20px; padding: 40px;"
+            mensagem.innerHTML = `<img src="scooby_doo/scooby-doo.gif" alt=""><br>`
+        }
+
+        mensagem.innerHTML += `<h1>Você tem o perfil de: ${perfil}</h1>`
+    }
+</script>
+
+</html>
