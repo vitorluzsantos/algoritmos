@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input type="text" id="iptCoragem" placeholder="Digite o quanto voce tem de coragem">
+		<input type="text" id="iptInteligencia" placeholder="Digite o quanto voce tem de inteligencia">
+		<input type="text" id="iptSensibilidade" placeholder="Digite o quanto voce tem de iptSensibilidade">
+		<input type="text" id="iptTemperamento" placeholder="Digite o quanto voce tem de temperamento">
+
+		<button onclick="teste()">Teste de personalidade</button>
+		<div id="resultado"></div>
+	
+	</body>
+	<script>
+	function teste(){
+		let coragem = Number(iptCoragem.value);
+		let inteligencia = Number(iptInteligencia.value);
+		let sensibilidade = Number(iptSensibilidade.value);
+		let temperamento = Number(iptTemperamento.value);
+
+		if((inteligencia >= 8 && coragem >= 7 && temperamento <= 6)|| (inteligencia > coragem && inteligencia > sensibilidade)){
+				resultado.innerHTML = `<p style='color:white;'>Você é a florzinha</p>`;
+				document.body.style.backgroundColor = 'pink';
+				resultado.innerHTML += `<img src="img/florzinha.gif" alt="">`
+		}
+		if((sensibilidade >= 8 && temperamento<= 5)|| (sensibilidade > inteligencia && sensibilidade > coragem)){
+				resultado.innerHTML = `<p style='color:white;'>Você é a lindinha</p>`;
+				document.body.style.backgroundColor = 'blue';
+				resultado.innerHTML += `<img src="img/lindinha.gif" alt="">`
+		}
+		else{
+			resultado.innerHTML = `<p style='color:white';>Você é a docinho</p>`;
+				document.body.style.backgroundColor = 'green';
+				resultado.innerHTML += `<img src="img/docinho.gif" alt="">`
+		}
+		// if(coragem >= 8 && temperamento >= 7){
+		// 	resultado.innerHTML = `<p style='color:green';>Você é a docinho</p>`;
+		// }
+	}
+	</script>
+	<style>
+		input{
+			width: 400px;
+		}
+	</style>
+</html>
