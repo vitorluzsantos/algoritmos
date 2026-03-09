@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+	
+		<h1>Operadores Matemáticos</h1>
+		<input type="text" id="idNum01">
+		<input type="text" id="idNum02">
+
+		<button onclick="calcular()">Calcular</button>
+		<p id="idResultado"></p>
+	</body>
+	<script>
+		function calcular(){
+			let num01 = Number(idNum01.value);
+			let num02 = Number(idNum02.value);
+
+			// alert("A subtração é: " + (num01 - num02));
+			// alert("A soma é: " + (num01 + num02)); 
+			// alert("A multiplicação é: " + (num01 * num02)); 
+			// alert("A divisão é: " + (num01 / num02)); 
+
+			idResultado.innerHTML =
+				`
+				Soma: ${(num01 + num02)} <br>
+				<b>Multi</b>: ${(num01 * num02)} <br>
+				Div: ${(num01 / num02)}<br>
+				`
+		}
+		
+	</script>
+</html>

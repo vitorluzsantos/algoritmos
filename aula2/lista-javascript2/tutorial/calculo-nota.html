@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+	
+		<input id="idNota01">
+		<input id="idNota02">
+		<button onclick="calcular()">Calcular</button>
+		<p id="idResultado"></p>
+
+	</body>
+	<script>
+	function calcular(){
+		let nota01 = Number(idNota01.value);
+		let nota02 = Number(idNota02.value);
+		let media  = `sua nota é: ${(nota01 + nota02)/2}' `
+
+		idResultado.innerHTML = media; 
+	}
+	</script>
+</html>

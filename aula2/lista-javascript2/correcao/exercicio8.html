@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input type="number" id="idValor" placeholder="Escreva o valor: ">
+		<button onclick="depositar()">Depositar</button>
+		<button onclick="retirar()">Retirar</button>
+		<br>
+		<div id="mensagem"></div>
+	</body>
+	<script>
+		let saldo = 0;
+		function depositar(){
+			let valor = Number(idValor.value);
+			saldo = saldo + valor;
+			alert(`Deposito de R$${valor} efetuado! saldo atual: R$${saldo}`);
+		}
+		function retirar(){
+			let valor = Number(idValor.value);
+			saldo = saldo - valor;
+			alert(`Retirada de R$${valor} efetuado! saldo atual: R$${saldo}`);
+		}
+		
+	</script>
+</html>

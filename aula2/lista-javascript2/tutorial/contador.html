@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+	
+		<h1>Bora contar!</h1>
+		<button onclick="contar()">Contar</button>
+		<h1 id="idContagem"></h1>
+	</body>
+	<script>
+		let contador = 0;
+		function contar(){
+			contador = contador + 1;
+			idContagem.innerHTML = contador;
+		}
+		
+	</script>
+</html>

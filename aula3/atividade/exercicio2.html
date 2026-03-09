@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>consumo anual de refrigerante</title>
+	</head>
+	<body>
+		<input type="text" placeholder="Quantas latas de refrigerante voce toma por dia: " id="idQuantidade">
+		<button onclick="calcularQuantidadeRefris()">Quantos refris</button>
+		<p id="idResultado"></p>
+
+	</body>
+	<script>
+		function calcularQuantidadeRefris(){
+			let quantidade = Number(idQuantidade.value);
+			let total = quantidade * 365;
+
+			idResultado.innerHTML = `A quantidade anual de refrigerantes é de ${total}`
+			if(total >= 500){
+				idResultado.innerHTML += `<br> Cuidado com as diabetes`;
+			}
+
+		}
+	</script>
+</html>

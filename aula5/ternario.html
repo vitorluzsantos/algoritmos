@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+	
+		<h3>Qual é a resposta numerica? Adivinhe!!!</h3>
+		<input id="ipt_numero">
+
+		<button onclick="adivinhar()">adivinhe</button>
+		<div id="div_resultado"></div>
+	</body>
+	<script>
+		function adivinhar(){
+			/* voce acertou se for 42						 */
+			/* voce errou (qualquer outra coisa) */
+
+			let palpite = Number(ipt_numero.value);
+			let mensagem = palpite == 42 ? "voce acertou" : "voce errou";
+
+			div_resultado.innerHTML = mensagem;
+		}
+	</script>
+</html>

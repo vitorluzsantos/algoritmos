@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input type="text" id="idNome">
+		<button onclick="apresentar()">apresentar</button>
+		<p id="idResultado"></p>
+	</body>
+	<script>
+		function apresentar(){
+			let nome = idNome.value;
+			idResultado.innerHTML = `Ola ${nome}, bom te ver aqui!`
+		}
+	</script>
+</html>

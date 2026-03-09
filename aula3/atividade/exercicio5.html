@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>calculo da conta de luz</title>
+	</head>
+	<body>
+		<input type="number" placeholder="Digite a quantidade de KWh" id="idQuantidadeKWh">
+		<button onclick="calcularContaLuz()">Calcular conta de luz </button>
+	</body>
+	<script>
+	function calcularContaLuz(){
+		let quantidade = Number(idQuantidadeKWh.value);
+		let total = quantidade * 0.85;
+		if(quantidade < 100){
+			total = total - (total * 0.10);
+		}
+		alert(`O valor da conta a ser paga é de ${total}`);
+	}
+	</script>
+</html>
