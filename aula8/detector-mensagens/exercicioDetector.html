@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Detector de mensagens suspeitas</title>
+	</head>
+	<body>
+		<p>Digite uma mensagem</p>
+		<input type="text" id="idMensagem">
+
+		<button onclick="analisar()">Analisar Mensagem</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function analisar(){
+		let mensagem = idMensagem.value;
+		let link = false;
+		let spam = false;
+		
+		resultado.innerHTML+= `Tamanho da mensagem ${mensagem.length}<br>`
+		resultado.innerHTML+= `A palavra começa com Eu ? ${mensagem.startsWith('Eu')}<br>`
+		resultado.innerHTML+= `A palavra termina com .com ? ${mensagem.endsWith('.com')}<br>`
+		resultado.innerHTML+= `A palavra termina com .br ? ${mensagem.endsWith('.br')}<br>`
+		resultado.innerHTML+= `A palavra começa com o caractere ${mensagem[0]}<br>`
+		resultado.innerHTML+= `O terceiro caractere da palavra é ${mensagem[3]}<br>`
+		resultado.innerHTML+= `A palavra acaba com o caractere ${mensagem[mensagem.length -1]}<br>`
+		resultado.innerHTML+= `Indice de onde esta o Bob ${mensagem.indexOf('Bob')}<br>`
+		resultado.innerHTML+= `Tem a palavra bob ${mensagem.includes('Bob')}<br>`
+		resultado.innerHTML+= `Frase em maiusculo ${mensagem.toUpperCase()}<br>`
+		resultado.innerHTML+= `Frase em minusculo ${mensagem.toLowerCase()}<br>`
+		resultado.innerHTML+= `Frases sem espaço ${mensagem.trim()}<br>`
+
+		if((mensagem.replaceAll(' ','')).length == 0){
+			resultado.innerHTML = "Digite uma mensagem válida"
+		}else if(mensagem.length < 10){
+			resultado.innerHTML = "Mensagem muito curta para analise";
+		}
+		if(mensagem.includes('Bob')){
+			resultado.innerHTML += "Atenção: usuário bob mencionado na mensagem.";
+		}
+		if(mensagem.endsWith('.com') || mensagem.endsWith('.br')){
+			resultado.innerHTML += "A mensagem contem um possivel link";
+			link = true;
+		}
+		if(mensagem.includes('promoção') || mensagem.includes('grátis')){
+			resultado.innerHTML += "Possível mensagem com spam";
+			spam = false;
+		}
+		if(mensagem.startsWith('Eu')){
+			resultado.innerHTML += "A mensagem parece estar escrita em primeira pessoa";
+		}
+		if(spam){
+			resultado.innerHTML += "Mensagem suspeita";
+		}
+		if(link){
+			resultado.innerHTML += "Mensagem com link"
+		}
+	}
+	</script>
+</html>

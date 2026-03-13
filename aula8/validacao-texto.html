@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>validação</title>
+	</head>
+	<body>
+		<input type="text" id="iptTexto">
+		<button onclick="validar()">Validar Frase</button>
+	</body>
+	<script>
+	function validar(){
+		let frase = iptTexto.value;
+		let contemBobInicio = frase.startsWith("Bob");
+		console.log(`O texto começa com bob? ${contemBobInicio}`);
+		
+		let contemBobFim = frase.endsWith("Bob");
+		console.log(`O texto termina com bob? ${contemBobFim}`); 
+		
+		let cpfLimpo = frase.trim(); /*a função só retira os espaços das laterais */
+		console.log(`Exemplo CPF original: ${frase}`);
+		console.log(`Exemplo CPF limpo: ${cpfLimpo}`);
+
+		let tamanhoFrase = frase.length;
+		console.log(`O tamanho da frase é ${tamanhoFrase}`);
+
+		let primeiraLetra = frase[0];
+		console.log(`Primeira letra da frase ${primeiraLetra}`)
+
+		console.log(removeEspaco(frase));
+	}
+
+	function removeEspaco(frase){
+		let novaFrase = "";
+		for(let i = 0; i < frase.length; i++){
+			if(frase[i] != " "){
+				novaFrase += frase[i];
+			}
+		}
+		return novaFrase;
+	}
+	</script>
+</html>

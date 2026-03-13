@@ -20,12 +20,32 @@
 		</select>
 		<br>
 		<button onclick="simular()">Simular preço</button>
-	
+		<div id="divMensagem"></div>	
 	</body>
 	<script>
 	function simular(){
 		let passageiro = tipoPassageiro.value;
+		let passagem = tipoPassagem.value;
+		let valorUnitario = 4.40;
+		let valorIntegracao = 5.90;
+		let mensagem = "O valor da passagem escolhida: R$";
 
+		if(passageiro == "estudante" && passagem == "unica"){
+			divMensagem.innerHTML = mensagem + (valorUnitario/2);
+		}
+		else if(passageiro == "estudante" && passagem == "integracao"){
+			divMensagem.innerHTML = mensagem + (valorIntegracao/2);
+		}
+		else if(passageiro == "idosoPNE"){
+			divMensagem.innerHTML = "Você não paga nada."
+		}
+		else if(passagem == "unica"){
+			divMensagem.innerHTML = mensagem + valorUnitario; 
+		}
+		else{
+			divMensagem.innerHTML = mensagem + valorIntegracao;
+		}
 	}
+
 	</script>
 </html>
