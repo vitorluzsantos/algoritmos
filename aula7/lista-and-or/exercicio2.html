@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Simulador de preferencias de compras</title>
+	</head>
+	<body>
+		<p>Digite o tamanho do celular</p>
+		<input type="number" placeholder="ex: 10" id="idTamanho">
+		<br>
+		<p>Digite a cor do celular</p>
+		<input type="text" placeholder="Preto, Prata, Azul, Vermelho" id="idCor">
+		<br>
+		<button onclick="analisar()">Será que ele gosta?</button>
+		<div id="divMensagem"></div>
+	</body>
+	<script>
+	function analisar(){
+		let tamanho = Number(idTamanho.value);
+		let cor = idCor.value;
+
+		if((cor == 'Preto' || cor == 'Prata') && tamanho > 6.5){
+			divMensagem.innerHTML = `<img src="img/feliz.jpg" alt="">`
+		}
+		else{
+			divMensagem.innerHTML = `<img src="img/triste.webp" alt="">`
+		}
+	}
+	</script>
+	<style>
+		img{
+			width: 250px;
+			height: 250px;
+		}
+	</style>
+</html>
