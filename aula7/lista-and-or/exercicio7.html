@@ -19,17 +19,25 @@
 		<div id="resultado"></div>
 	</body>
 	<script>
+	let contador = 3;
 	function autenticar(){
 		let senha = idSenha.value;
 		let usuario = idUsuario.value;
 		let infoPessoal = informacaoPessoal.value;
 
-		if(usuario.toLowerCase() == "ana" && senha == "braga" && (infoPessoal == "1949" || infoPessoal == "louro josé")){
-			resultado.innerHTML = "Usuario autenticado";
+		if(contador != 0){
+			if(usuario.toLowerCase() == "ana" && senha == "braga" && (infoPessoal == "1949" || infoPessoal == "louro josé")){
+				resultado.innerHTML = "Usuario autenticado";
+			}
+			else{
+				contador --;
+				resultado.innerHTML = "Falha na autenticação";
+				resultado.innerHTML = `<br>Você ainda tem ${contador} tentativa(s)`;
+			} 
 		}
 		else{
-			resultado.innerHTML = "Falha na autenticação";
-		} 
+			resultado.innerHTML = "Usuário BLOQUEADO! procure o seu gerente";
+		}
 	}
 	</script>
 </html>
