@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<input placeholder="palpite para o primeiro lugar" id="palpite01">
+		<br>
+		<input placeholder="palpite para o segundo lugar" id="palpite02">
+		<br>
+		<input placeholder="palpite para o terceiro lugar" id="palpite03">
+		<br>
+		<input placeholder="palpite para o quarto lugar" id="palpite04">
+		<br>
+		<input placeholder="palpite para o quinto lugar" id="palpite05">
+		<br>
+		<button onclick="palpitar()">Palpitar</button>
+		<div id="resultado"></div>
+		<h2>Meus Campeões</h2>
+		<input placeholder="Digite o nome do seu campeão" id="idCampeao">
+		<button adicionar()>Adicionar</button>
+		<div id="resultadoCampeao"></div>
+		<h2>Buscar Campeões</h2>
+		<input id="nomeCampeao" placeholder="buscar">
+		<button onclick="buscar()">Pesquisar</button>
+		<div id="resultadoBusca"></div>
+	</body>
+	<script>
+	let listaUsuario = [];
+
+	function buscar(){
+		let nome = nomeCampeao.value;
+		let taNasDuas = false;	
+		if(listaUsuario.indexOf(nome) && vencedores.indexOf(nome)){
+			taNasDuas = true;
+		}
+
+		resultadoCampeao.innerHTML = `
+			O ${nome} esta na lista do usuario ${listaUsuario.indexOf(nome)}<br>
+			O ${nome} esta na lista do sistema ${vencedores.indexOf(nome)}<br>
+			O ${nome} esta em ambas as listas ${taNasDuas}
+`
+	}
+	function adicionar(){
+		let campeaoUsuario = idCampeao.value;
+		listaUsuario.push(campeaoUsuario);
+		resultadoCampeao.innerHTML = `${listaUsuario}`
+	}
+
+	function palpitar(){
+		let p1 = palpite01.value;
+		let p2 = palpite02.value;
+		let p3 = palpite03.value;
+		let p4 = palpite04.value;
+		let p5 = palpite05.value;
+		let acertos = 0; 
+		let mensagemAcerto = `<br><br>Voce acertou os seguintes nomes <br>`;
+		let mensagemErro = `<br>Voce errou os seguintes nomes <br>`;
+		
+		// Matheus Jacob Vitor da Luz Raphael Canuto Pedrao Marina
+		let vencedores = ["Matheus Jacob","Vitor da Luz", "Raphael Canuto", "Pedrão","Marina"];
+		let palpites = [p1, p2, p3, p4, p5]
+		if(palpites[0] == vencedores[0]){
+			acertos = acertos + 1;
+			mensagemAcerto += `${vencedores[0]}<br>`
+		}
+		else{
+			mensagemErro += `${palpites[0]}`
+		}
+		if(palpites[1] == vencedores[1]){
+			acertos = acertos + 1;
+			mensagemAcerto += `${vencedores[1]}<br>`
+		}
+		else{
+			mensagemErro += `${palpites[1]}<br>`
+		}
+		if(palpites[2] == vencedores[2]){
+			acertos = acertos + 1;
+			mensagemAcerto += `${vencedores[2]}<br>`
+		}
+		else{
+			mensagemErro += `${palpites[2]}<br>`
+		}
+		if(palpites[3] == vencedores[3]){
+			acertos = acertos + 1;
+			mensagemAcerto += `${vencedores[3]}<br>`
+		}
+		else{
+			mensagemErro += `${palpites[3]}<br>`
+		}
+		if(palpites[4] == vencedores[4]){
+			acertos = acertos + 1;
+			mensagemAcerto += `${vencedores[4]}<br>`
+		}
+		else{
+			mensagemErro += `${palpites[4]}<br>`
+		}
+
+		let erros = palpites.length - acertos;
+		console.log(erros);
+		console.log(acertos);
+		if(acertos >= 3){
+			resultado.innerHTML = "Você conhece bem essa competição";
+		}
+		else{
+			resultado.innerHTML = "Você precisa acompanhar mais essa competição";
+		}
+		resultado.innerHTML += mensagemAcerto;
+		resultado.innerHTML += mensagemErro;
+		resultado.innerHTML += `<br>${vencedores[0].toUpperCase()} + 🎖️`
+
+	}
+
+	</script>
+</html>
