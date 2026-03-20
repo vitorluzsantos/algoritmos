@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p>Informe quantas latas de cocacola voce acha que bebeu na vida</p>
+		<input id="idCocaCola">
+		<button onclick="verQuantidade()">Ver quantidade</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function verQuantidade(){
+		resultado.innerHTML = "";
+		let quantidadeLatas = Number(idCocaCola.value);
+		for(let i = 0; i < quantidadeLatas; i++){
+			resultado.innerHTML += `<img src="./img/imagemCoca.webp">`;
+		}
+	}
+	</script>
+	<style>
+	img{
+		width: 50px;
+		height: 50px;
+	}
+	</style>
+</html>

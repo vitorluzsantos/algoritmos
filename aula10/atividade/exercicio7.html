@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p>Digite quantos depositos voce fez no banco</p>
+		<input id="idQuantidadeDepositos">
+		<p>Digite o valor do deposito</p>
+		<input id="idValorDeposito">
+		<button onclick="acompanharGrana()">Acompanhar Grana</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function acompanharGrana(){
+		let quantidadeDeposito = Number(idQuantidadeDepositos.value);
+		let valorDeposito = Number(idValorDeposito.value);
+		let valorGuardado = 0;
+		let voltas = 0;
+		for(let i = 0; i <= quantidadeDeposito; i++){
+			voltas ++;
+			valorGuardado = valorGuardado + valorDeposito;
+			if(voltas == 3){
+				voltas = 0;
+				valorGuardado = valorGuardado + (valorGuardado * 0.01);
+				resultado.innerHTML +=`${i}° Mês: R$${valorGuardado} <img src="./img/estrela.png"><br>`;
+			}
+			else{
+				resultado.innerHTML +=`${i}° Mês: R$${valorGuardado}<br>`;
+			}
+		}
+		resultado.innerHTML += `<br>Total guardado R$${valorGuardado}`;
+	}
+	</script>
+	<style>
+	img{
+		width: 12px;
+		height: 12px;
+	}
+	</style>
+</html>

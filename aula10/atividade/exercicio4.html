@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p>Quantas xicaras de café com leite voce ja tomou</p>
+		<input id="quantidadeXicaras">
+		<button onclick="verQuantidade()">Ver a quantidade</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function verQuantidade(){
+		let quantidade = Number(quantidadeXicaras.value);
+
+		resultado.innerHTML = "";
+		for(let i = 0; i < quantidade; i++){
+			resultado.innerHTML+= `<img src="./img/colherLeite.jpg" alt="">`;
+			resultado.innerHTML+= `<img src="./img/colherCafe.avif" alt="">`;
+			resultado.innerHTML+= `<img src="./img/colherCafe.avif" alt="">`;
+		}
+	}
+	</script>
+	<style>
+	img{
+		width: 50px !important;
+		height: 50px;
+	}
+	</style>
+</html>

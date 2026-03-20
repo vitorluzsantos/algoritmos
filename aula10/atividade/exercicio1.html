@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p>Quantas pessoas vão entrar no carro?</p>
+		<input id="idQuantidade">
+		<button type="number" onclick="partiuCarona()">#PartiuCarona</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function partiuCarona(){
+		let quantidade = Number(idQuantidade.value);
+		let mensagem = "";
+		
+		for(let i = 1; i <= quantidade; i++){
+			if(i == 1){
+				mensagem += "Entrou o motorista";
+			}
+			else if(i <= 5){
+				mensagem += `<br>Entrou o ${i}° Passageiro`;
+			}
+			else{
+				mensagem += `<br>O ${i}° passageiro tem que esperar`;
+			}
+		}
+		resultado.innerHTML = mensagem;
+	}
+	</script>
+</html>
