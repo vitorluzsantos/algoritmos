@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Invasao de Impel Down</title>
+	</head>
+	<body>
+		<p>Digite a quantidade de batalhas</p>
+		<input id="id_qtd_batalhas">
+		<p>Digite a quantidade de marinheiros em cada batalha</p>
+		<input id="id_qtd_marinheiros">
+		<p>Digite a quantidade de carnes</p>
+		<input id="id_qtd_carnes">
+
+		<button onclick="analisar()">Batalhar!</button>
+		<div id="div_resultado"></div>
+	</body>
+	<script>
+	let luffy_energia = 100;
+	function analisar(){
+		let quantidade_batalhas = Number(id_qtd_batalhas.value);
+		let quantidade_marinheiros = Number(id_qtd_marinheiros.value);
+		let quantidade_carnes = Number(id_qtd_carnes.value);
+		let resultado = `Luffy saiu vitorioso, derrotando ${quantidade_marinheiros} marinheiros`;
+		let mensagem = 
+		`
+			<br>
+			=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+			<br>Quantidade de batalhas: ${quantidade_batalhas}
+			<br>Quantidade de energia: ${luffy_energia}
+			<br>Quantidade de carnes: ${quantidade_carnes}
+			<br>
+			=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+			<br>
+		`;
+
+		for(let i = 0; i < quantidade_batalhas; i++){
+			if(luffy_energia > 0){
+				mensagem += `
+				<br>
+				=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+				<br>
+				${i}° Batalha iniciada:<br> 
+				Quantidade de energia inicial: ${luffy_energia}<br>
+				`
+				for(let j = 0; j < quantidade_marinheiros; j ++){
+					if(luffy_energia > 0){
+						luffy_energia = luffy_energia - 5;
+					}
+					else if(quantidade_carnes > 0){
+						luffy_energia = 100;
+						quantidade_carnes = quantidade_carnes - 1;
+					}
+					else{
+						resultado = `Luffy foi derrotado, derrotando ${j} marinheiros`
+					}
+				}
+				mensagem += `
+					Resultado: ${resultado}
+					<br>
+					<br>
+					⚡ Energia restante no final da batalha: ${luffy_energia}<br>
+					🥩 Carnes restantes no final da batalha: ${quantidade_carnes}
+					`;
+			}
+			else{
+				mensagem += `<br><br>🛞 Não é possível iniciar a ${i} batalha, acabou a carne e a energia.`;
+			}
+		}
+		div_resultado.innerHTML = mensagem;
+	}
+	</script>
+</html>
