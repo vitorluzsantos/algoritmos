@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Invasao de Impel Down</title>
+</head>
+<body>
+	<p>Digite a quantidade de batalhas</p>
+	<input id="idQtdBatalhas">
+
+	<p>Digite a quantidade de marinheiros em cada batalha</p>
+	<input id="idQtdMarinheiros">
+
+	<p>Digite a quantidade de carnes</p>
+	<input id="idQtdCarnes">
+
+	<br><br>
+	<button onclick="simular()">Batalhar!</button>
+
+	<br><br>
+	<div id="divResultado" style="font-family: monospace;"></div>
+</body>
+
+<script>
+function simular(){
+	let quantidadeBatalhas = Number(idQtdBatalhas.value);
+	let quantidadeMarinheiros = Number(idQtdMarinheiros.value);
+	let quantidadeCarnes = Number(idQtdCarnes.value);
+
+	let mensagem = "";
+
+	let batalha = 1;
+	let marinheiro = 0;
+	let derrotados = 0;
+	let acabou = false;
+
+	let energiaBase = 100;
+	let luffy = energiaBase;
+
+	for(let i = 0; batalha <= quantidadeBatalhas; i++){
+
+		// INÍCIO DA BATALHA
+		if(marinheiro == 0){
+
+			let energiaInicial = energiaBase - (batalha - 1) * 10;
+			luffy = energiaInicial;
+			derrotados = 0;
+
+			mensagem += `<br>${batalha}° Batalha Iniciada:<br>`;
+
+			if(acabou || (luffy <= 0 && quantidadeCarnes <= 0)){
+				mensagem += `🛞 Não é possível iniciar a ${batalha}ª batalha, acabou a carne e a energia<br>`;
+				batalha++;
+				continue;
+			}
+
+			if(luffy <= 0 && quantidadeCarnes > 0){
+				luffy = 100;
+				quantidadeCarnes--;
+			}
+
+			mensagem += `Energia inicial: ${luffy}<br>`;
+		}
+
+		// LUTA
+		if(luffy < 5){
+			if(quantidadeCarnes > 0){
+				luffy = 100;
+				quantidadeCarnes--;
+			}else{
+				mensagem += `Resultado: Luffy foi derrotado, derrotando ${derrotados} marinheiros<br>`;
+				mensagem += `⚡ Energia restante: ${luffy}<br>`;
+				mensagem += `🥩 Carnes restantes: ${quantidadeCarnes}<br>`;
+
+				acabou = true;
+				batalha++;
+				marinheiro = 0;
+				continue;
+			}
+		}
+
+		luffy -= 5;
+		derrotados++;
+		marinheiro++;
+
+		// FIM DA BATALHA (VITÓRIA)
+		if(marinheiro == quantidadeMarinheiros){
+			mensagem += `Resultado: Luffy saiu vitorioso, derrotando ${derrotados} marinheiros<br>`;
+			mensagem += `⚡ Energia restante: ${luffy}<br>`;
+			mensagem += `🥩 Carnes restantes: ${quantidadeCarnes}<br>`;
+
+			batalha++;
+			marinheiro = 0;
+		}
+	}
+
+	divResultado.innerHTML = mensagem;
+}
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>tabuada colorida</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<select id="idTabuada">
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		</select>
+		<button onclick="calculadora()">Ver Tabuada</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function calculadora(){
+		let tabuada = idTabuada.value;
+		let contador = 1;
+		let resTabuada;
+
+		while(contador <= 12){
+			resTabuada = tabuada * contador;
+			resultado.innerHTML += `<br>${tabuada} x ${contador} = ${resTabuada}`
+			contador ++
+		}
+	}
+	</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Invasao de Impel Down</title>
+	</head>
+	<body>
+		<p>Digite a quantidade de batalhas</p>
+		<input id="idQtdBatalhas">
+		<p>Digite a quantidade de marinheiros em cada batalha</p>
+		<input id="idQtdMarinheiros">
+		<p>Digite a quantidade de carnes</p>
+		<input id="idQtdCarnes">
+
+		<button onclick="simular()">Batalhar!</button>
+		<div id="divResultado"></div>
+	</body>
+	<script>
+function simular(){
+	let quantidadeBatalhas = Number(idQtdBatalhas.value);
+	let quantidadeMarinheiros = Number(idQtdMarinheiros.value);
+	let quantidadeCarnes = Number(idQtdCarnes.value);
+
+	let mensagem = "";
+	let energiaBase = 100;
+	let acabou = false;
+
+	for(let i = 0; i < quantidadeBatalhas; i++){
+
+		let energiaInicial = energiaBase - (i * 10);
+		let luffy = energiaInicial;
+		let derrotados = 0;
+
+		mensagem += `<br>${i+1}° Batalha Iniciada:<br>`;
+
+		// SE JÁ ACABOU
+		if(acabou){
+			mensagem += `🛞 Não é possível iniciar a ${i+1}ª batalha, acabou a carne e a energia<br>`;
+			continue;
+		}
+
+		// NÃO PODE INICIAR AGORA
+		if(luffy <= 0 && quantidadeCarnes <= 0){
+			mensagem += `🛞 Não é possível iniciar a ${i+1}ª batalha, acabou a carne e a energia<br>`;
+			acabou = true;
+			continue;
+		}
+
+		mensagem += `Quantidade de energia inicial: ${luffy}<br>`;
+
+		// COME CARNE ANTES
+		if(luffy <= 0 && quantidadeCarnes > 0){
+			luffy = 100;
+			quantidadeCarnes--;
+		}
+
+		// BATALHA
+		for(let j = 0; j < quantidadeMarinheiros; j++){
+
+			if(luffy < 5){
+				if(quantidadeCarnes > 0){
+					luffy = 100;
+					quantidadeCarnes--;
+				}else{
+					break;
+				}
+			}
+
+			luffy -= 5;
+			derrotados++;
+		}
+
+		if(derrotados == quantidadeMarinheiros){
+			mensagem += `Resultado: Luffy saiu vitorioso, derrotando ${derrotados} marinheiros<br>`;
+		}else{
+			mensagem += `Resultado: Luffy foi derrotado, derrotando ${derrotados} marinheiros<br>`;
+			acabou = true; // acabou aqui também
+		}
+
+		mensagem += `⚡ Energia restante: ${luffy}<br>`;
+		mensagem += `🥩 Carnes restantes: ${quantidadeCarnes}<br>`;
+	}
+
+	divResultado.innerHTML = mensagem;
+}
+</script>
+</html>
