@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>exercicio 4</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="idNumero">
+		<button onclick="exibirPares()">S2 pares</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function exibirPares(){
+		let numero = Number(idNumero.value);
+		let contador = 0;
+		
+		while(contador <= numero){
+			if(contador % 2 == 0){
+				resultado.innerHTML += `${contador} `
+			}
+			contador ++
+		}
+	}
+	</script>
+</html>

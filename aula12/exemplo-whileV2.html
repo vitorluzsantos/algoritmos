@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>WHILE V2</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="resultado"></div>
+	</body>
+	<script>
+		let numeroDigitado = prompt("Tente acertar o numero:");
+		// o usuario não sabe, mas a resposta é 42
+
+		while(numeroDigitado != 42){
+			numeroDigitado = prompt("Tente outro:");
+		}
+		alert("Parabens, acertou");
+	</script>
+</html>

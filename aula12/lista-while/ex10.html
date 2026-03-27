@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>corrida de voltas</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="quantidadeCorrida" placeholder="Digite a quantidade de voltas">
+		<button onclick="corrida()">Iniciar corrida</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function corrida(){
+		let voltas = Number(quantidadeCorrida.value);
+		let contador = 0;
+		
+		while(contador < voltas){
+			resultado.innerHTML += `<br>O carro dando a ${contador + 1}° volta`;
+			contador ++
+		}
+		resultado += "Corrida finalizada";
+	}
+	</script>
+</html>

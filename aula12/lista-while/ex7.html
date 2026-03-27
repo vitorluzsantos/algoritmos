@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>viva o sete</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="idNumero" placeholder="Digite um número entre 0 e 200">
+		<button onclick="vivaSete()">viva o 7 !</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	function vivaSete(){
+		let numero = Number(idNumero.value);
+		let contador = 0;
+		if(numero >= 0 && numero <= 200){
+			while(contador < numero){
+				if(contador % 7 == 0){
+					resultado.innerHTML += `${contador} `;
+				}
+				contador ++
+			}
+		}
+		else{
+			resultado.innerHTML = "robozinho errrrorrrr"
+		}
+	}
+	</script>
+</html>
