@@ -1,0 +1,138 @@
+<!DOCTYPE html> <html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<input placeholder="Cadastrar estoque " id="idCadastro">
+		<button onclick="cadastrar()">Cadastrar</button>
+		<button onclick="verificar()">Verificar Quantidade</button>
+		<div id="resultado"></div>
+		<hr>
+		<input id="idNomeComida" placeholder="Digite o nome de uma comida">
+		<button onclick="pesquisar()">Pesquisar</button>
+		<div id="resultado_pesquisa"></div>
+		<hr>
+		<button onclick="exibir()">Exibir Estoque</button>
+		<div id="resultado_exibir"></div>
+		<hr>
+		<input id="idNomeAntigo" placeholder="Digite o nome atual da fruta">
+		<input id="idNomeNovo" placeholder="Digite o nome novo da fruta">
+		<button onclick="alterar()">Alterar Estoque</button>
+		<div id="resultado_alterar"></div>
+		<hr>
+		<input id="idRemover">
+		<button onclick="remover()">Remover Comida</button>
+		<div id="resultado_remover"></div>
+
+	</body>
+	<script>
+	let lista = [];
+	function cadastrar(){
+		let valorLista = idCadastro.value;
+
+		lista.push(valorLista);
+		console.log(lista);
+	}
+
+	function verificar(){
+		let quantidade = lista.length;
+		let mensagem = "";
+
+		if(quantidade < 3){
+			mensagem = "Desse jeito o luffy devorá até o navio";
+		}
+		else if(quantidade >= 3 && quantidade <= 7){
+			mensagem = "O comilão do luffy não vai deixar sobrar nenhuma comida";
+		}
+		else if(quantidade >= 8 && quantidade <= 10){
+			mensagem = "Assim, talvez sobre um pouco para a tripulação";
+		}
+		else if(quantidade > 10){
+			mensagem = "Desse jeito vai ter comida pra todo mundo e ainda consigo guardar um pouco para a senhorita Nami";
+		}
+		resultado.innerHTML = mensagem;
+	}
+
+	function pesquisar(){
+		let nomeComida = idNomeComida.value;
+		let contador = 0;
+		let mensagem = "";
+
+		for(let i = 0; i < lista.length; i++){
+			if(lista[i] == nomeComida){
+				contador ++;
+			}
+		}
+		if(contador == 0){
+			mensagem = `Alguem vai ter que comprar ${nomeComida}`;
+		}
+		else{
+			mensagem = `Temos a comida ${nomeComida} e ha ${contador} unidades dela`;
+		}
+		resultado_pesquisa.innerHTML = mensagem;
+	}
+
+	function exibir(){
+		let mensagem = "";
+		let contador = 0;
+		lista_exclusao = [];
+		for(let i = 0; i < lista.length; i++){
+			if (!lista_exclusao.includes(lista[i])) {
+
+				for(let j = 0; j < lista.length; j++){
+					if(lista[i] == lista[j]){
+						contador ++;
+					}
+				}
+				lista_exclusao.push(lista[i]);
+				mensagem += `- ${lista[i]} (${contador})<br>`;
+			}
+			contador = 0;
+		}
+		resultado_exibir.innerHTML = mensagem;
+
+	}
+
+	function alterar(){
+		let nomeAntigo = idNomeAntigo.value;
+		let nomeNovo = idNomeNovo.value;
+		let mensagem = "";
+
+		if(lista.includes(nomeAntigo)){
+			for(let i = 0; i < lista.length; i++){
+				if(lista[i] == nomeAntigo){
+					lista[i] = nomeNovo; 
+				}
+			}
+			mensagem = `A comida ${nomeAntigo} foi alterada para ${nomeNovo}`;
+		}
+		else{
+			mensagem = `A comida ${nomeAntigo} não foi encontrada`;
+		}
+		resultado_alterar.innerHTML = mensagem;
+	}
+
+	function remover(){
+		let removerComida = idRemover.value;
+
+		let lixeira = [];
+
+		console.log(lista);
+		if(lista.includes(removerComida)){
+			for(let i = 0; i < lista.length; i++){
+				if(lista[i] != removerComida){
+					lixeira.push(lista[i]);
+				}
+			}
+			resultado_remover.innerHTML = `A comida ${removerComida} foi removida da lista`;
+		}
+		else{
+			resultado_remover.innerHTML = `A comida ${removerComida} não esta no estoque`;
+		}
+		lista = lixeira;
+		console.log(lista);
+	}
+
+
+	</script>
+</html>
