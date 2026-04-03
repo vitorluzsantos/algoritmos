@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input type="number" id="qtd">
+		<button onclick="cocaFor()">Ver</button>
+
+		<div id="res"></div>
+
+		<script>
+function cocaFor() {
+	var qtd = Number(qtd.value);
+	var texto = "";
+
+	for (var i = 1; i <= qtd; i++) {
+		texto += "🥤";
+	}
+
+	res.innerHTML = texto;
+}
+		</script>
+
+	</body>
+</html>
+

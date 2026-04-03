@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Café com Leite</h2>
+
+<input type="number" id="qtd">
+<button onclick="cafeWhile()">Ver</button>
+
+<div id="res"></div>
+
+<script>
+function cafeWhile() {
+  var qtd = Number(qtd.value);
+  var leite = qtd;
+  var cafe = qtd * 2;
+  var texto = "";
+
+  var i = 1;
+  while (i <= leite) {
+    texto += '<img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" width="30">';
+    i++;
+  }
+
+  texto += "<br>";
+
+  var j = 1;
+  while (j <= cafe) {
+    texto += '<img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" width="30">';
+    j++;
+  }
+
+  res.innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

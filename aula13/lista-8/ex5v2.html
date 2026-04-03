@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input id="v">
+		<button onclick="run()">Iniciar</button>
+		<div id="res"></div>
+
+		<script>
+function run(){
+	res.innerHTML=""
+	let i=1
+	while(i<=v.value){
+		res.innerHTML+="Volta "+i+"<br>"
+		i++
+	}
+	res.innerHTML+="Corrida finalizada!"
+}
+		</script>
+
+	</body>
+</html>

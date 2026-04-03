@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input id="t">
+		<input id="l">
+		<button onclick="run()">Ver</button>
+		<div id="res"></div>
+
+		<script>
+function run(){
+	res.innerHTML=""
+	for(let i=1;i<=l.value;i++){
+		let cor=i%2==0?"blue":"red"
+		res.innerHTML+=`<span style="color:${cor}">${t.value} x ${i} = ${t.value*i}</span><br>`
+	}
+}
+		</script>
+
+	</body>
+</html>
+

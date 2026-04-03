@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input id="n">
+		<button onclick="run()">OK</button>
+		<div id="res"></div>
+
+		<script>
+function run(){
+	res.innerHTML=""
+	let i=0
+	while(i<=n.value){
+		if(i%5==0) res.innerHTML+=i+"<br>"
+		i++
+	}
+}
+		</script>
+
+	</body>
+</html>

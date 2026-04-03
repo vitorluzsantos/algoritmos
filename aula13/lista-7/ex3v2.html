@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input type="number" id="qtd">
+		<button onclick="cocaWhile()">Ver</button>
+
+		<div id="res"></div>
+
+		<script>
+function cocaWhile() {
+	var qtd = Number(qtd.value);
+	var texto = "";
+	var i = 1;
+
+	while (i <= qtd) {
+		texto += "🥤";
+		i++;
+	}
+
+	res.innerHTML = texto;
+}
+		</script>
+
+	</body>
+</html>

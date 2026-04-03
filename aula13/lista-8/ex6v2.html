@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input id="t" placeholder="Tabuada (2 a 9)">
+		<input id="l" placeholder="Limite">
+		<button onclick="run()">Ver</button>
+
+		<div id="res"></div>
+
+		<script>
+function run(){
+	res.innerHTML=""
+
+	let i = 1
+
+	while(i <= l.value){
+		let cor = (i % 2 == 0) ? "blue" : "red"
+		res.innerHTML += `<span style="color:${cor}">${t.value} x ${i} = ${t.value * i}</span><br>`
+		i++
+	}
+}
+		</script>
+
+	</body>
+</html>
+

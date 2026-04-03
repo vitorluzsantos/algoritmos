@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="qtd" placeholder="Pessoas">
+<input type="number" id="cap" placeholder="Capacidade">
+<button onclick="caronaFor()">#Partiu Carona</button>
+
+<div id="res"></div>
+
+<script>
+function caronaFor() {
+  var qtd = Number(qtd.value);
+  var cap = Number(cap.value);
+  var texto = "";
+
+  for (var i = 1; i <= qtd; i++) {
+    if (i == 1) {
+      texto += "Entrou o 1º passageiro (motorista)<br>";
+    } else if (i <= cap) {
+      texto += "Entrou o " + i + "º passageiro<br>";
+    } else {
+      texto += "O " + i + "º passageiro terá que esperar!<br>";
+    }
+  }
+
+  res.innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

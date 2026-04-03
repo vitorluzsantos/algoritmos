@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="qtd">
+<input type="number" id="valor">
+<button onclick="bonusFor()">Calcular</button>
+
+<div id="res"></div>
+
+<script>
+function bonusFor() {
+  var qtd = Number(qtd.value);
+  var valor = Number(valor.value);
+  var total = 0;
+  var texto = "";
+
+  for (var i = 1; i <= qtd; i++) {
+    total += valor;
+
+    if (i % 3 == 0) {
+      total *= 1.01;
+      texto += i + "º mês: R$ " + total.toFixed(2) + " ⭐<br>";
+    } else {
+      texto += i + "º mês: R$ " + total.toFixed(2) + "<br>";
+    }
+  }
+
+  texto += "Total: R$ " + total.toFixed(2);
+
+  res.innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

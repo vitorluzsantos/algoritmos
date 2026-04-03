@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input id="i">
+		<input id="f">
+		<button onclick="run()">Pares</button>
+		<div id="res"></div>
+
+		<script>
+function run(){
+	res.innerHTML=""
+	for(let x=Number(i.value);x<=Number(f.value);x++)
+	if(x%2==0) res.innerHTML+=x+"<br>"
+}
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<input type="number" id="qtd">
+		<input type="number" id="valor">
+		<button onclick="bonusWhile()">Calcular</button>
+
+		<div id="res"></div>
+
+		<script>
+function bonusWhile() {
+	var qtd = Number(qtd.value);
+	var valor = Number(valor.value);
+	var total = 0;
+	var texto = "";
+	var i = 1;
+
+	while (i <= qtd) {
+		total += valor;
+
+		if (i % 3 == 0) {
+			total *= 1.01;
+			texto += i + "º mês: R$ " + total.toFixed(2) + " ⭐<br>";
+		} else {
+			texto += i + "º mês: R$ " + total.toFixed(2) + "<br>";
+		}
+
+		i++;
+	}
+
+	texto += "Total: R$ " + total.toFixed(2);
+
+	res.innerHTML = texto;
+}
+		</script>
+
+	</body>
+</html>
