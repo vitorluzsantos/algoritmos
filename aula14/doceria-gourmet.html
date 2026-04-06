@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Doceria Gourmet</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="mainContainer">
+			<div class="content">
+				<p>Digite a quantidade de macarons a serem vendidos</p>
+				<input id="idQtdMacaron">
+
+				<p>Digite o valor da unidade</p>
+				<input id="idValorMacaron">
+			</div>
+
+			<div class="content">
+				<p>Digite a quantidade de brigadeiros</p>
+				<input id="idQtdBrigadeiro">
+
+				<p>Digite o valor da unidade</p>
+				<input id="idValorBrigadeiro">
+			</div>
+
+			<div class="content">
+				<p>Digite a quantidade de cupcakes</p>
+				<input id="idQtdCupcake">
+
+				<p>Digite o valor da unidade</p>
+				<input id="idValorCupcake">
+			</div>
+
+			<div class="content">
+				<p>Digite a quantidade de cheesecakes</p>
+				<input id="idQtdCheesecake">
+
+				<p>Digite o valor da unidade</p>
+				<input id="idValorCheesecake">
+			</div>
+			<br>
+			<br>
+
+			<button onclick="verificar()">Verificar vendas</button>
+			<div id="div_resultado"></div>
+		</div>
+	</body>
+	<script>
+	function verificar(){
+		let qtdMacaron = Number(idQtdMacaron.value);
+		let qtdBrigadeiro = Number(idQtdBrigadeiro.value);
+		let qtdCupcake = Number(idQtdCupcake.value);
+		let qtdCheesecake= Number(idQtdCheesecake.value);
+
+		let valorMacaron = Number(idValorMacaron.value);
+		let valorBrigadeiro = Number(idValorBrigadeiro.value);
+		let valorCupcake = Number(idQtdCupcake.value);
+		let valorCheesecake = Number(idValorCheesecake.value);
+
+		if(qtdMacaron >= 0 && qtdBrigadeiro >= 0 && qtdCupcake >= 0 && qtdCheesecake >= 0 && valorMacaron >= 0 && valorBrigadeiro >= 0  && valorCupcake >= 0 && valorCheesecake >= 0){
+
+			if(qtdMacaron > 0){
+				for(let i = 0; i < qtdMacaron; i++){
+					div_resultado.innerHTML += `<p>venda ${i + 1} - <img src="img/macaron.jpg"> - ${valorMacaron}</p>`;
+				}
+				div_resultado.innerHTML += `<br>`;
+				div_resultado.innerHTML += `<hr>`;
+				div_resultado.innerHTML += `<br>`;
+			}
+
+			if(qtdBrigadeiro > 0){
+				for(let i = 0; i < qtdBrigadeiro; i++){
+					div_resultado.innerHTML += `<p>venda ${i + 1} - <img src="img/brigadeiro.avif"> - ${valorBrigadeiro}</p>`;
+				}
+				div_resultado.innerHTML += `<br>`;
+				div_resultado.innerHTML += `<hr>`;
+				div_resultado.innerHTML += `<br>`;
+			}
+
+			if(qtdCupcake > 0){
+				for(let i = 0; i < qtdCupcake; i++){
+					div_resultado.innerHTML += `<p>venda ${i + 1} - <img src="img/cupcake.avif"> - ${valorCupcake}</p>`;
+				}
+				div_resultado.innerHTML += `<br>`;
+				div_resultado.innerHTML += `<hr>`;
+				div_resultado.innerHTML += `<br>`;
+			}
+
+			if(qtdCheesecake > 0){
+				for(let i = 0; i < qtdCheesecake; i++){
+					div_resultado.innerHTML += `<p>venda ${i + 1} - <img src="img/cheesecake.jpg"> - ${valorCheesecake}</p>`;
+				}
+			}
+		}
+		else{
+			div_resultado.innerHTML = "Algum valor digitado é negativo, certifique-se de que todos os valores sejam positivos";
+		}
+
+	}
+	</script>
+</html>

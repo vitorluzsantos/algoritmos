@@ -75,7 +75,7 @@
 	function exibir(){
 		let mensagem = "";
 		let contador = 0;
-		lista_exclusao = [];
+		let lista_exclusao = [];
 		for(let i = 0; i < lista.length; i++){
 			if (!lista_exclusao.includes(lista[i])) {
 
@@ -90,7 +90,6 @@
 			contador = 0;
 		}
 		resultado_exibir.innerHTML = mensagem;
-
 	}
 
 	function alterar(){
@@ -115,13 +114,13 @@
 	function remover(){
 		let removerComida = idRemover.value;
 
-		let lixeira = [];
+		let novaLista = [];
 
 		console.log(lista);
 		if(lista.includes(removerComida)){
 			for(let i = 0; i < lista.length; i++){
 				if(lista[i] != removerComida){
-					lixeira.push(lista[i]);
+					novaLista.push(lista[i]);
 				}
 			}
 			resultado_remover.innerHTML = `A comida ${removerComida} foi removida da lista`;
@@ -129,7 +128,7 @@
 		else{
 			resultado_remover.innerHTML = `A comida ${removerComida} não esta no estoque`;
 		}
-		lista = lixeira;
+		lista = novaLista;
 		console.log(lista);
 	}
 

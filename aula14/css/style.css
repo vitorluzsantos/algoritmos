@@ -1,0 +1,36 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+img{
+	width: 20px;
+}
+
+
+.mainContainer{
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+	gap: 10pX;
+}
+
+.mainContainer input{
+	width: 50px;
+}
+
+button{
+	width: 200px;
+	height: 30px;
+	text-decoration: none;
+	border: solid 2px black;
+	border-bottom: solid 4px black;
+}
+
+.content{
+	border: solid 2px black;
+	width: 300px;
+	padding: 10px;
+}
