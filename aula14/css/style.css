@@ -10,7 +10,7 @@ img{
 
 
 .mainContainer{
-	width: 500px;
+	width: 400px;
 	display: flex;
 	flex-direction: column;
 	padding: 50px;
@@ -27,6 +27,7 @@ button{
 	text-decoration: none;
 	border: solid 2px black;
 	border-bottom: solid 4px black;
+	align-self: center;
 }
 
 .content{
