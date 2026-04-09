@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="idPalavra" placeholder="Digite uma palavra">
+		<button onclick="adicionar()">Adicionar</button>
+		<button onclick="exibirRepetidos()">Exibir repetidos</button>
+		<button onclick="removerDuplicados()">Remover Duplicados</button>
+		<div id="div_resultado"></div>
+	</body>
+	<script>
+	vetor = []
+	function adicionar(){
+		let palavra = idPalavra.value;
+		vetor.push(palavra);
+		exibir();
+	}
+
+	function exibirRepetidos(){
+		let nomesRepetidos = [];
+		let contador = 0;
+		let auxiliar;
+		for(let i = 0; i < vetor.length; i++){
+			contador = 0;
+			for(let j = 0; j < vetor.length; j++){
+					if(vetor[j] == vetor[i]){
+						auxiliar = vetor[j];
+						contador++;
+					}
+				}
+			if(contador > 1 && !nomesRepetidos.includes(vetor[i])){
+				nomesRepetidos.push(auxiliar);
+			}
+		}
+		div_resultado.innerHTML = nomesRepetidos;
+		exibir();
+	}
+
+	function removerDuplicados(){
+		let vetorNovo = [];
+		for(let i = 0; i < vetor.length; i++){
+			if(!vetorNovo.includes(vetor[i])){
+				vetorNovo.push(vetor[i]);
+			}
+		}
+		vetor = vetorNovo;
+		div_resultado.innerHTML = vetor;
+		exibir();
+	}
+
+	function exibir(){
+		let mensagem = ``;
+		for(let i = 0; i < vetor.length; i++){
+			mensagem += `<br>${vetor[i]}`;
+		}
+		div_resultado.innerHTML += `<br> -- exibindo vetor --` + mensagem;
+	}
+	</script>
+</html>
