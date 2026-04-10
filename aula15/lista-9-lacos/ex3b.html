@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ex3B</title>
+	</head>
+	<body>
+
+		<input id="ipt_palavra">
+		<button onclick="validar()">Validar</button>
+
+		<div id="div_resultado"></div>
+
+	</body>
+
+	<script>
+function validar(){
+	let texto = ipt_palavra.value;
+	let tratado = "";
+	let invertido = "";
+
+	for(let i = 0; i < texto.length; i++){
+		let c = texto[i];
+
+		if(c != " "){
+			if(c >= "A" && c <= "Z"){
+				tratado += String.fromCharCode(c.charCodeAt(0) + 32);
+			} else {
+				tratado += c;
+			}
+		}
+	}
+
+	for(let i = tratado.length - 1; i >= 0; i--){
+		invertido += tratado[i];
+	}
+
+	if(tratado == invertido){
+		div_resultado.innerHTML = "É palíndromo<br>" + invertido;
+	} else {
+		div_resultado.innerHTML = "Não é palíndromo<br>" + invertido;
+	}
+}
+	</script>
+</html>

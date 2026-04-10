@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ex5B</title>
+	</head>
+	<body>
+
+		<input id="ipt_texto">
+		<button onclick="inverter()">Inverter</button>
+
+		<div id="div_resultado"></div>
+
+	</body>
+
+	<script>
+function inverter(){
+	let texto = ipt_texto.value;
+	let letras = [];
+	let resultado = "";
+
+	// pega só letras
+	for(let i = 0; i < texto.length; i++){
+		let c = texto[i];
+
+		if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')){
+			letras.push(c);
+		}
+	}
+
+	// monta invertendo só letras
+	for(let i = 0; i < texto.length; i++){
+		let c = texto[i];
+
+		if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')){
+			resultado += letras[letras.length - 1];
+			letras.pop();
+		} else {
+			resultado += c;
+		}
+	}
+
+	div_resultado.innerHTML = resultado;
+}
+	</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Poupança</title>
+	</head>
+	<body>
+
+		<h2>Poupança</h2>
+
+		Depósito: <input id="ipt_deposito"><br>
+		Meses: <input id="ipt_meses"><br>
+		Juros: <input id="ipt_juros"><br>
+
+		Sonho: <input id="ipt_sonho"><br>
+		Valor sonho: <input id="ipt_valorSonho"><br>
+
+		<button onclick="projetar()">Projetar</button>
+
+		<div id="div_msg"></div>
+
+	</body>
+
+	<script>
+function projetar(){
+
+	let deposito = Number(ipt_deposito.value);
+	let meses = Number(ipt_meses.value);
+	let juros = Number(ipt_juros.value)/100;
+	let sonho = ipt_sonho.value;
+	let valorSonho = Number(ipt_valorSonho.value);
+
+	if(deposito <= 0 || meses <= 0 || juros <= 0 || juros >= 0.1 || sonho.length < 3 || valorSonho <= deposito){
+		div_msg.innerHTML = "Dados inválidos";
+		return;
+	}
+
+	let saldo = 0;
+	let msg = "";
+
+	for(let i = 1; i <= meses; i++){
+		let inicial = saldo;
+		let ganho = inicial * juros;
+		saldo = inicial + ganho + deposito;
+
+		msg += `<br>Mês ${i} - Inicial ${inicial.toFixed(2)} - Juros ${ganho.toFixed(2)} - Depósito ${deposito.toFixed(2)} - Final ${saldo.toFixed(2)}`;
+	}
+
+	let diferenca = saldo - valorSonho;
+
+	if(saldo >= valorSonho){
+		msg += `<br>Parabéns, sobrou ${diferenca.toFixed(2)}`;
+	} else {
+		msg += `<br>Faltou ${Math.abs(diferenca).toFixed(2)}`;
+	}
+
+	div_msg.innerHTML = msg;
+}
+	</script>
+</html>

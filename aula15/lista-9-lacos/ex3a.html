@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ex3A</title>
+	</head>
+	<body>
+
+		<input id="ipt_palavra">
+		<button onclick="validar()">Validar</button>
+
+		<div id="div_resultado"></div>
+
+	</body>
+
+	<script>
+function validar(){
+	let texto = ipt_palavra.value.toLowerCase().replaceAll(" ", "");
+	let invertido = "";
+
+	for(let i = texto.length - 1; i >= 0; i--){
+		invertido += texto[i];
+	}
+
+	if(texto == invertido){
+		div_resultado.innerHTML = "É palíndromo<br>" + invertido;
+	} else {
+		div_resultado.innerHTML = "Não é palíndromo<br>" + invertido;
+	}
+}
+	</script>
+</html>

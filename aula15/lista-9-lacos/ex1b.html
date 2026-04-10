@@ -2,63 +2,76 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title></title>
-		<link href="css/style.css" rel="stylesheet">
+		<title>Ex1B</title>
 	</head>
 	<body>
-		<input id="idPalavra" placeholder="Digite uma palavra">
+
+		<input id="idPalavra">
 		<button onclick="adicionar()">Adicionar</button>
-		<button onclick="exibirRepetidos()">Exibir repetidos</button>
-		<button onclick="removerDuplicados()">Remover Duplicados</button>
+		<button onclick="exibirDuplicados()">Exibir Duplicados</button>
+		<button onclick="removerDuplicatas()">Remover Duplicatas</button>
+
 		<div id="div_resultado"></div>
+
 	</body>
+
 	<script>
-	vetor = []
-	function adicionar(){
-		let palavra = idPalavra.value;
-		vetor.push(palavra);
-		exibir();
-	}
+let vetor = [];
 
-	function exibirRepetidos(){
-		let nomesRepetidos = [];
+function adicionar(){
+	vetor.push(idPalavra.value);
+	exibir();
+}
+
+function existe(vet, valor){
+	for(let i = 0; i < vet.length; i++){
+		if(vet[i] == valor){
+			return true;
+		}
+	}
+	return false;
+}
+
+function exibirDuplicados(){
+	let duplicados = [];
+
+	for(let i = 0; i < vetor.length; i++){
 		let contador = 0;
-		let auxiliar;
-		for(let i = 0; i < vetor.length; i++){
-			contador = 0;
-			for(let j = 0; j < vetor.length; j++){
-					if(vetor[j] == vetor[i]){
-						auxiliar = vetor[j];
-						contador++;
-					}
-				}
-			if(contador > 1 && !nomesRepetidos.includes(vetor[i])){
-				nomesRepetidos.push(auxiliar);
+
+		for(let j = 0; j < vetor.length; j++){
+			if(vetor[i] == vetor[j]){
+				contador++;
 			}
 		}
-		div_resultado.innerHTML = nomesRepetidos;
-		exibir();
+
+		if(contador > 1 && !existe(duplicados, vetor[i])){
+			duplicados.push(vetor[i]);
+		}
 	}
 
-	function removerDuplicados(){
-		let vetorNovo = [];
-		for(let i = 0; i < vetor.length; i++){
-			if(!vetorNovo.includes(vetor[i])){
-				vetorNovo.push(vetor[i]);
-			}
+	div_resultado.innerHTML = duplicados;
+	exibir();
+}
+
+function removerDuplicatas(){
+	let novo = [];
+
+	for(let i = 0; i < vetor.length; i++){
+		if(!existe(novo, vetor[i])){
+			novo.push(vetor[i]);
 		}
-		vetor = vetorNovo;
-		div_resultado.innerHTML = vetor;
-		exibir();
 	}
 
-	function exibir(){
-		let mensagem = ``;
-		for(let i = 0; i < vetor.length; i++){
-			mensagem += `<br>${vetor[i]}`;
-		}
-		div_resultado.innerHTML += `<br> -- exibindo vetor --` + mensagem;
+	vetor = novo;
+	exibir();
+}
+
+function exibir(){
+	let msg = "";
+	for(let i = 0; i < vetor.length; i++){
+		msg += "<br>" + vetor[i];
 	}
+	div_resultado.innerHTML += msg;
+}
 	</script>
 </html>

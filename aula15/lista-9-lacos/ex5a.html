@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ex5A</title>
+	</head>
+	<body>
+
+		<input id="ipt_texto">
+		<button onclick="inverter()">Inverter</button>
+
+		<div id="div_resultado"></div>
+
+	</body>
+
+	<script>
+function inverter(){
+	let texto = ipt_texto.value;
+	let invertido = "";
+
+	for(let i = texto.length - 1; i >= 0; i--){
+		invertido += texto[i];
+	}
+
+	div_resultado.innerHTML = invertido;
+}
+	</script>
+</html>

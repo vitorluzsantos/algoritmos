@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ex2B</title>
+	</head>
+	<body>
+
+		<input id="ipt_texto">
+		<button onclick="inverter()">Inverter</button>
+
+		<div id="div_resultado"></div>
+
+	</body>
+
+	<script>
+function inverter(){
+	let texto = ipt_texto.value;
+	let vetor = [];
+	let invertido = "";
+
+	for(let i = 0; i < texto.length; i++){
+		vetor[i] = texto[i];
+	}
+
+	for(let i = vetor.length - 1; i >= 0; i--){
+		invertido += vetor[i];
+	}
+
+	div_resultado.innerHTML = invertido;
+}
+	</script>
+</html>
