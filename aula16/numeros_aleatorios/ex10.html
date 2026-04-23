@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex10</title>
+</head>
+<body>
+	<button onclick="j1()">Dado Jogador 1</button>
+	<button onclick="j2()">Dado Jogador 2</button>
+	<button onclick="comparar()">Comparar Resultados</button>
+
+	<div id="div_resultado"></div>
+
+	<script>
+		let d1 = 0;
+		let d2 = 0;
+
+		function j1(){
+			d1 = Math.floor(Math.random()*6)+1;
+			div_resultado.innerHTML = "Jogador 1: " + d1;
+		}
+
+		function j2(){
+			d2 = Math.floor(Math.random()*6)+1;
+			div_resultado.innerHTML += "<br>Jogador 2: " + d2;
+		}
+
+		function comparar(){
+			if(d1 > d2){
+				div_resultado.innerHTML += "<br>Jogador 1 venceu";
+			}else if(d2 > d1){
+				div_resultado.innerHTML += "<br>Jogador 2 venceu";
+			}else{
+				div_resultado.innerHTML += "<br>Empate!";
+			}
+		}
+	</script>
+</body>
+</html>

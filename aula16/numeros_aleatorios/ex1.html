@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ex1</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<button onclick="sortear()">Sortear</button>
+		<div id="div_resultado"></div>
+	</body>
+	<script>
+		function sortear(){
+			let aleatorio = Math.random();
+			let mensagem = aleatorio > 0.5 ? 'Eu arredondaria para 1' : 'Eu arredondaria para 0';
+			div_resultado.innerHTML = mensagem;
+		}
+	</script>
+</html>

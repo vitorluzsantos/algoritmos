@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex14</title>
+</head>
+<body>
+	<button onclick="lua()">Ver a Lua</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		function lua(){
+			let dia = Math.floor(Math.random()*31)+1;
+			let fase = "";
+
+			if(dia <= 7){
+				fase = "Lua nova";
+			}else if(dia <= 16){
+				fase = "Lua cheia";
+			}else if(dia <= 22){
+				fase = "Lua minguante";
+			}else{
+				fase = "Lua crescente";
+			}
+
+			div_resultado.innerHTML = `Dia: ${dia}<br>${fase}`;
+		}
+	</script>
+</body>
+</html>

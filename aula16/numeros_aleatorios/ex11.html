@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex11</title>
+</head>
+<body>
+	<button onclick="avaliar()">Avaliar</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		function avaliar(){
+			let nota = (Math.random()*5).toFixed(1);
+			let emoji = "";
+
+			if(nota <= 0.5){
+				emoji = "😢 Muito Triste";
+			}else if(nota <= 1.5){
+				emoji = "🙁 Meio Triste";
+			}else if(nota <= 3.5){
+				emoji = "😐 Neutro";
+			}else if(nota <= 4.5){
+				emoji = "🙂 Feliz";
+			}else{
+				emoji = "😄 Muito Feliz";
+			}
+
+			div_resultado.innerHTML = `Nota recebida: ${nota}<br>${emoji}`;
+		}
+	</script>
+</body>
+</html>

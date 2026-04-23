@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex5</title>
+</head>
+<body>
+	<button onclick="jogar()">Jogar</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		let v1 = 0;
+		let v2 = 0;
+
+		function jogar(){
+			let p1 = Math.floor(Math.random()*3);
+			let p2 = Math.floor(Math.random()*3);
+
+			let opcoes = ["Pedra", "Papel", "Tesoura"];
+
+			let resultado = "";
+
+			if(p1 == p2){
+				resultado = "Empate!";
+			}else if(
+				(p1==0 && p2==2) ||
+				(p1==1 && p2==0) ||
+				(p1==2 && p2==1)
+			){
+				v1++;
+				resultado = "Jogador 1 venceu!";
+			}else{
+				v2++;
+				resultado = "Jogador 2 venceu!";
+			}
+
+			div_resultado.innerHTML = `
+				${opcoes[p1]} vs ${opcoes[p2]} <br><br>
+				${resultado} <br><br>
+				Jogador 1: ${v1} vitória(s) <br>
+				Jogador 2: ${v2} vitória(s)
+			`;
+		}
+	</script>
+</body>
+</html>

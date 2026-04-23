@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex8</title>
+</head>
+<body>
+	<button onclick="nota()">Gerar nota</button>
+	<button onclick="freq()">Gerar frequência</button>
+	<button onclick="ver()">Ver Situação</button>
+
+	<div id="div_resultado"></div>
+
+	<script>
+		let n = 0;
+		let f = 0;
+
+		function nota(){
+			n = (Math.random()*10).toFixed(2);
+			div_resultado.innerHTML = "Nota: " + n;
+		}
+
+		function freq(){
+			f = (Math.random()*100).toFixed(2);
+			div_resultado.innerHTML += "<br>Frequência: " + f;
+		}
+
+		function ver(){
+			alert(`Nota: ${n} | Frequência: ${f}`);
+		}
+	</script>
+</body>
+</html>

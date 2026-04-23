@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex12</title>
+</head>
+<body>
+	<button onclick="avaliar()">Avaliar</button>
+	<button onclick="media()">Verificar Média</button>
+
+	<div id="div_resultado"></div>
+
+	<script>
+		let soma = 0;
+		let qtd = 0;
+		let ultima = 0;
+
+		function avaliar(){
+			ultima = Math.random()*5;
+			soma += ultima;
+			qtd++;
+
+			div_resultado.innerHTML = `Nota: ${ultima.toFixed(1)}`;
+		}
+
+		function media(){
+			let m = soma / qtd;
+
+			let emoji = "";
+
+			if(m <= 0.5){
+				emoji = "😢";
+			}else if(m <= 1.5){
+				emoji = "🙁";
+			}else if(m <= 3.5){
+				emoji = "😐";
+			}else if(m <= 4.5){
+				emoji = "🙂";
+			}else{
+				emoji = "😄";
+			}
+
+			div_resultado.innerHTML += `<br>Média geral: ${m.toFixed(1)} ${emoji}`;
+		}
+	</script>
+</body>
+</html>

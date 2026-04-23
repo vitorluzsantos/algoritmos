@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex9</title>
+</head>
+<body>
+	<button onclick="nota()">Gerar nota</button>
+	<button onclick="freq()">Gerar frequência</button>
+	<button onclick="ver()">Ver Aprovação</button>
+
+	<div id="div_resultado"></div>
+
+	<script>
+		let n = 0;
+		let f = 0;
+
+		function nota(){
+			n = (Math.random()*7 + 3).toFixed(1);
+			div_resultado.innerHTML = "Nota: " + n;
+		}
+
+		function freq(){
+			f = (Math.random()*50 + 50).toFixed(1);
+			div_resultado.innerHTML += "<br>Frequência: " + f;
+		}
+
+		function ver(){
+			let status = (n >= 6 && f >= 75)
+				? "aprovado"
+				: "reprovado";
+
+			div_resultado.innerHTML += `
+				<br><br>Com nota ${n} e frequência ${f}, o aluno está ${status}!
+			`;
+		}
+	</script>
+</body>
+</html>

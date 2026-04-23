@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex6</title>
+</head>
+<body>
+	<button onclick="sortear()">Sortear momento do dia</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		function sortear(){
+			let hora = Math.floor(Math.random() * 24);
+			let msg = "";
+
+			if(hora <= 11){
+				msg = `Bom dia, flor do dia, são ${hora}h!`;
+			}else if(hora <= 17){
+				msg = `Boa tarde, já vai tarde! São ${hora}h!`;
+			}else{
+				msg = `Boa noite, durma bem! São ${hora}h!`;
+			}
+
+			div_resultado.innerHTML = msg;
+		}
+	</script>
+</body>
+</html>

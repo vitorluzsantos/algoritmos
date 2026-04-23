@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex18</title>
+</head>
+<body>
+	<div>
+		Jogador 1: <span id="j1">0</span><br>
+		Jogador 2: <span id="j2">0</span><br>
+		Empate: <span id="emp">0</span>
+	</div>
+
+	<button onclick="jogar()">Jogar</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		let v1 = 0;
+		let v2 = 0;
+		let emp = 0;
+
+		function jogar(){
+			let d1 = Math.floor(Math.random()*6)+1;
+			let d2 = Math.floor(Math.random()*6)+1;
+
+			if(d1 > d2){
+				v1++;
+			}else if(d2 > d1){
+				v2++;
+			}else{
+				emp++;
+			}
+
+			j1.innerHTML = v1;
+			j2.innerHTML = v2;
+			emp.innerHTML = emp;
+
+			if(v1 > v2){
+				div_resultado.innerHTML = "Jogador 1 está vencendo!";
+			}else if(v2 > v1){
+				div_resultado.innerHTML = "Jogador 2 está vencendo!";
+			}else{
+				div_resultado.innerHTML = "O jogo está empatado!";
+			}
+		}
+	</script>
+</body>
+</html>

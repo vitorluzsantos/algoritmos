@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex2</title>
+</head>
+<body>
+	<button onclick="sortear()">Sortear time</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		function sortear(){
+			let n = Math.floor(Math.random() * 4);
+
+			let imagens = [
+				"https://upload.wikimedia.org/wikipedia/commons/1/15/Santos_Logo.png",
+				"https://upload.wikimedia.org/wikipedia/commons/4/4e/Corinthians_logo.svg",
+				"https://upload.wikimedia.org/wikipedia/commons/3/35/Sao_Paulo_FC_logo.svg",
+				"https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.svg"
+			];
+
+			div_resultado.innerHTML = `<img src="${imagens[n]}" height="150px">`;
+		}
+	</script>
+</body>
+</html>

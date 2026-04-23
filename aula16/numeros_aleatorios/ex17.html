@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex17</title>
+</head>
+<body>
+	Nome: <input id="nome"><br>
+	Números: <input id="n1"> <input id="n2"> <input id="n3"><br>
+
+	<button onclick="sortear()">Sortear</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		let tentativas = 0;
+
+		function sortear(){
+			let nums = [Number(n1.value), Number(n2.value), Number(n3.value)];
+
+			tentativas++;
+
+			let sorteado = Math.floor(Math.random()*100)+1;
+
+			if(nums.includes(sorteado)){
+				div_resultado.innerHTML =
+				`Parabéns, ${nome.value} o número ${sorteado} foi sorteado após ${tentativas} sorteios!`;
+			}
+		}
+	</script>
+</body>
+</html>

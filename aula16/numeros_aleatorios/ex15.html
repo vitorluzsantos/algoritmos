@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>ex15</title>
+</head>
+<body>
+	<div>
+		Números pares: <span id="pares">0</span><br>
+		Números ímpares: <span id="impares">0</span>
+	</div>
+
+	<button onclick="sortear()">Sortear número</button>
+	<div id="div_resultado"></div>
+
+	<script>
+		let p = 0;
+		let i = 0;
+
+		function sortear(){
+			let n = Math.floor(Math.random()*22) - 30;
+
+			div_resultado.innerHTML = n;
+
+			if(n % 2 == 0){
+				p++;
+				pares.innerHTML = p;
+			}else{
+				i++;
+				impares.innerHTML = i;
+			}
+		}
+	</script>
+</body>
+</html>
