@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="ipt_nota">
+		<button onclick="lancar_notas()">Atualizar</button>
+		<div id="resultado"></div>
+	</body>
+	<script src="./funcoes.js"></script>
+	<script>
+	let notas = []
+	function lancar_notas(){
+		let nota_do_dia = Number(ipt_nota.value);
+		notas.push(nota_do_dia);
+		console.log(`Notas: ${notas}`);
+		let media = calcular_media(notas);
+		resultado.innerHTML = `A media das notas é ${media}`
+	}
+	</script>
+</html>

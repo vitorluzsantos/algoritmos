@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<button onclick="add(5)">Adicionar 5</button>
+		<button onclick="add(1)">Adicionar 1</button>
+		<button onclick="add(2)">Adicionar 2</button>
+		<button onclick="add(3)">Adicionar 3</button>
+		<button onclick="add(7)">Adicionar 7</button>
+		<div id="div_resultado">
+		</div>
+	</body>
+	<script>
+	let num = 0;
+	function add(num_add){
+		num += num_add;
+		div_resultado.innerHTML = `O valor é: ${num_add}`;
+	}
+	</script>
+</html>

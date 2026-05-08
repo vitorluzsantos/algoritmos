@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="ipt_falta">
+		<button onclick="lancar_falta()">Atualizar</button>
+		<div id="id_resultado"> </div>
+	</body>
+	<script src="./funcoes.js"></script>
+	<script>
+		let faltas = [];
+		function lancar_falta(){
+			let falta_do_dia = Number(ipt_falta.value);
+			faltas.push(falta_do_dia);
+
+			let mediaFaltas = calcular_media(faltas)
+			id_resultado.innerHTML = `A média das lista é: ${mediaFaltas}`;
+		}
+	</script>
+</html>

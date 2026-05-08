@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Buscar Filmes:</h2>
+  
+  <span>Nome:</span>
+  <input type="text" id="ipt_nome">
+  <button onclick="pesquisarNome()">Pesquisar</button>
+
+  <span>Diretor:</span>
+  <input type="text" id="ipt_diretor">
+  <button onclick="pesquisarDiretor()">Pesquisar</button>
+
+  <span>Ano:</span>
+  <select id="ipt_ano_parametro">
+    <option value="maior_igual">&gt;=</option>
+    <option value="igual">==</option>
+    <option value="menor_igual">&lt;=</option>
+  </select>
+  <input type="number" id="ipt_ano">
+  <button onclick="pesquisarAno()">Pesquisar</button><br><br>
+
+  <span>Gênero:</span>
+  <input type="text" id="ipt_genero">
+  <button onclick="pesquisarGenero()">Pesquisar</button>
+
+  <span>Média:</span>
+  <select id="ipt_media_parametro">
+    <option value="maior_igual">&gt;=</option>
+    <option value="igual">==</option>
+    <option value="menor_igual">&lt;=</option>
+  </select>
+  <input type="text" id="ipt_media">
+  <button onclick="pesquisarMedia()">Pesquisar</button><br><br>
+
+  <button onclick="pesquisar()">Mostrar Todos</button>
+
+  <div id="div_resultado"></div>
+</body>
+</html>
+<script src="dados.js"></script>
+<script>
+	function pesquisarNome(){
+		let nomeDigitado = ipt_nome.value.toLowerCase();
+		for(let i = 0; i < filmes.length; i++){
+			if(filmes[i].nome.toLowerCase().includes(nomeDigitado)){
+				div_resultado.innerHTML += `Nome do filme: ${filmes[i].nome}<br>`;
+			}
+		}
+	}
+	function pesquisarDiretor(){
+		let nomeDigitado = ipt_diretor.value.toLowerCase();
+		for(let i = 0; i < filmes.length; i++){
+			if(filmes[i].diretor.toLowerCase().includes(nomeDigitado)){
+				div_resultado.innerHTML += `Nome do diretor: ${filmes[i].diretor}<br>`;
+			}
+		}
+	}
+	function pesquisarAno(){
+		let anoDigitado = Number(ipt_ano.value);
+		let anoParametro = ipt_ano_parametro.value;
+		let mensagem = "";
+
+			if(anoParametro == 'menor_igual'){
+				for(let i = 0; i < filmes.length; i++){
+					if(filmes[i].ano <= anoDigitado){
+						mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
+					}
+				}
+			}
+			else if(anoParametro == 'igual'){
+				for(let i = 0; i < filmes.length; i++){
+					if(filmes[i].ano == anoDigitado){
+						mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
+					}
+				}
+			}
+			else if(anoParametro == 'maior_igual'){
+				for(let i = 0; i < filmes.length; i++){
+					if(filmes[i].ano >= anoDigitado){
+						mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
+					}
+				}
+			}
+		div_resultado.innerHTML = mensagem;
+	}
+
+	function pesquisarGenero(){
+		let generoDigitado = ipt_genero.value.toLowerCase();
+		let mensagem = "";
+		for(let i = 0; i < filmes.length; i++){
+			for(let j = 0; j< filmes[i].generos.length;j++){
+				if(filmes[i].generos[j].toLowerCase().includes(generoDigitado)){
+					mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
+				}
+			}
+		}
+		console.log(mensagem);
+		div_resultado.innerHTML = mensagem;
+	}
+</script>

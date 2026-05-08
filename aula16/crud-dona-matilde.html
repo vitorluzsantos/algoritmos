@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<input id="idAntiguidade" placeholder="Cadastrar a antiguidade">
+		<button onclick="cadastrar()">cadastrar</button>
+		<button onclick="verificar()">verificar estoque</button>
+		<div id="resultado"></div>
+	</body>
+	<script>
+	let estoque = [];
+	function cadastrar(){
+		let antiguidade = idAntiguidade.value;
+		estoque.push(antiguidade);
+	}
+
+	function verificar(){
+		let mensagem = "";
+		let quantidade = estoque.length;
+		if(quantidade < 3){
+			mensagem = "A loja está quase vazia, precisamos de mais peças raras!";
+		}
+		else if(quantidade <= 7){
+			mensagem = "Temos algumas peças mas ainda podemos melhorar o acervo";
+		}
+		else if(quantidade <= 10){
+			mensagem = "Otimo a loja já esta bem interessante para os clientes";
+		}
+		else{
+			mensagem = "Excelente a loja está cheia de reliquias incriveis"
+		}
+
+		resultado.innerHTML = mensagem;
+	}
+
+	</script>
+</html>
