@@ -45,62 +45,88 @@
 </html>
 <script src="dados.js"></script>
 <script>
-	function pesquisarNome(){
-		let nomeDigitado = ipt_nome.value.toLowerCase();
-		for(let i = 0; i < filmes.length; i++){
-			if(filmes[i].nome.toLowerCase().includes(nomeDigitado)){
-				div_resultado.innerHTML += `Nome do filme: ${filmes[i].nome}<br>`;
-			}
+
+	function calcularMedia(notas){
+		let media = 0;
+		for(let i = 0; i < notas.length; i ++){
+			media += notas[i];
+		}
+		return (media / notas.length).toFixed(2);
+	}
+	
+	function montarResultado(lista){
+		div_resultado.innerHTML = '';
+		for(let i = 0; i < lista.length; i++){
+			div_resultado.innerHTML = 
+			`
+				Nome: ${lista[i].nome} | Diretor: ${lista[i].diretor} | Ano: ${lista[i].ano} | Média: ${calcularMedia(lista[i].media)}
+			`
 		}
 	}
+	function pesquisarNome(){
+		let nomeDigitado = ipt_nome.value.toLowerCase();
+		let filmesEncontrados = [];
+		for(let i = 0; i < filmes.length; i++){
+			if(filmes[i].nome.toLowerCase().includes(nomeDigitado)){
+				filmesEncontrados.push(filmes[i]);
+			}
+		}
+		montarResultado(filmesEncontrados);
+	}
 	function pesquisarDiretor(){
+		let filmesEncontrados = [];
 		let nomeDigitado = ipt_diretor.value.toLowerCase();
 		for(let i = 0; i < filmes.length; i++){
 			if(filmes[i].diretor.toLowerCase().includes(nomeDigitado)){
-				div_resultado.innerHTML += `Nome do diretor: ${filmes[i].diretor}<br>`;
+				filmesEncontrados.push(filmes[i]);
 			}
 		}
 	}
 	function pesquisarAno(){
+		let filmesEncontrados = [];
 		let anoDigitado = Number(ipt_ano.value);
 		let anoParametro = ipt_ano_parametro.value;
 		let mensagem = "";
 
-			if(anoParametro == 'menor_igual'){
-				for(let i = 0; i < filmes.length; i++){
-					if(filmes[i].ano <= anoDigitado){
-						mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
-					}
+		if(anoParametro == 'menor_igual'){
+			for(let i = 0; i < filmes.length; i++){
+				if(filmes[i].ano <= anoDigitado){
+					filmesEncontrados.push(filmes[i]);
 				}
 			}
-			else if(anoParametro == 'igual'){
-				for(let i = 0; i < filmes.length; i++){
-					if(filmes[i].ano == anoDigitado){
-						mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
-					}
+		}
+		else if(anoParametro == 'igual'){
+			for(let i = 0; i < filmes.length; i++){
+				if(filmes[i].ano == anoDigitado){
+					filmesEncontrados.push(filmes[i]);
 				}
 			}
-			else if(anoParametro == 'maior_igual'){
-				for(let i = 0; i < filmes.length; i++){
-					if(filmes[i].ano >= anoDigitado){
-						mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
-					}
+		}
+		else if(anoParametro == 'maior_igual'){
+			for(let i = 0; i < filmes.length; i++){
+				if(filmes[i].ano >= anoDigitado){
+					filmesEncontrados.push(filmes[i]);
 				}
 			}
-		div_resultado.innerHTML = mensagem;
+		}
+		montarResultado(filmesEncontrados);
 	}
 
 	function pesquisarGenero(){
+		let filmesEncontrados = [];
 		let generoDigitado = ipt_genero.value.toLowerCase();
 		let mensagem = "";
 		for(let i = 0; i < filmes.length; i++){
 			for(let j = 0; j< filmes[i].generos.length;j++){
 				if(filmes[i].generos[j].toLowerCase().includes(generoDigitado)){
-					mensagem += `Nome do filme: ${filmes[i].nome}<br>`;
+					filmesEncontrados.push(filmes[i]);
 				}
 			}
 		}
-		console.log(mensagem);
-		div_resultado.innerHTML = mensagem;
+		montarResultado(filmesEncontrados);
+	}
+
+	function pesquisar(){
+		montarResultado(filmes);
 	}
 </script>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<main>
+			<div class="container-inputs">
+				<p>Digite o titulo da musica</p>
+				<input id="inputTitulo" placeholder="ex: Black">
+
+				<p>Digite o nome da banda</p>
+				<input id="inputNomeBanda" placeholder="ex: Pearl Jam">
+
+				<p>Digite a duracao da musica</p>
+				<input id="inputDuracao" placeholder="ex: 5.42">
+
+				<p>Digite o ano de lançamento</p>
+				<input id="inputAnoLancamento" placeholder="ex: 1991">
+
+				<p>Digite a sua avaliação</p>
+				<input id="inputAvaliacao" placeholder="ex: 9.5, 10, 4.3">
+
+				<p>Digite os integrantes da banda</p>
+				<input id="inputIntegrantes" placeholder="ex: Eddie Vedder, Mike McCready">
+
+				<p>Buscar banda de um integrante</p>
+				<input id="inputIntegrante" placeholder="ex: Eddie Vedder">
+
+			</div>
+			<div class="container-btns">
+				<button onclick="adicionarMusica()">Adicionar a playlist</button>
+				<button onclick="listarMusicas()">Listar todas as musicas</button>
+				<button onclick="removerMusica()">Remover musica pelo titulo</button>
+				<button onclick="atualizarAnoLancamento()">Atualizar o ano de lancamento</button>
+				<button onclick="mediaAvaliacoes()">Calcular media de avaliacoes</button>
+				<button onclick="buscarBandaPorIntegrante()">Descobrir em qual banda esta o integrante</button>
+			</div>
+			
+			<div class="container-respostas">
+				<div id="resultado"></div>
+			</div>
+		</main>
+	</body>
+	<script>
+	let playlist = [
+		{
+			"titulo": "Black",
+			"banda": "Pearl Jam",
+			"duracao": 3.20,
+			"anoLancamento": "1991",
+			"avaliacoes": [5, 4], 
+			"integrantes": ['Eddie Vedder', 'Mike McCready', 'Matt Cameron']
+		}
+	];
+
+	function converterAvaliacoes(avaliacoes){
+		let avaliacoesConvertidas = [];
+		for(let i = 0; i < avaliacoes.length; i++){
+			avaliacoesConvertidas.push(Number(avaliacoes[i]));
+		}
+		return avaliacoesConvertidas
+	}
+
+	function adicionarMusica(){
+		let titulo = inputTitulo.value;
+		let banda = inputNomeBanda.value;
+		let duracao = Number(inputDuracao.value);
+		let anoLancamento = Number(inputAnoLancamento.value);
+		let avaliacoesDigitadas = inputAvaliacao.value;
+		let avaliacoes = converterAvaliacoes(avaliacoesDigitadas.split(",")); 
+		let integrantesDigitados = inputIntegrantes.value;
+		let integrantes = integrantesDigitados.split(",");
+
+		let musica = {
+			"titulo": titulo,
+			"banda": banda,
+			"duracao": duracao,
+			"anoLancamento": anoLancamento,
+			"avaliacoes": avaliacoes,
+			"integrantes": integrantes 
+		}
+		playlist.push(musica);
+
+		resultado.innerHTML = `Musica adicionada com sucesso`;
+		console.log(musica);
+	}
+
+	function listarMusicas(){
+		let resposta = "";
+		for(let i = 0; i < playlist.length; i++){
+			resposta += `<br> Musica ${i}: Titulo ${playlist[i].titulo} | Banda ${playlist[i].banda} | Duracao ${playlist[i].duracao}| Ano de Lancamento ${playlist[i].anoLancamento} | Avaliacoes ${playlist[i].avaliacoes} | Integrantes ${playlist[i].integrantes}`;
+		}
+
+		resultado.innerHTML = resposta;
+	}
+
+	function removerMusica(){
+		let musicaDigitada = inputTitulo.value;
+		let novaPlaylist = []
+
+		for(let i = 0; i < playlist.length; i++){
+			if(!playlist[i].titulo.toLowerCase().includes(musicaDigitada.toLowerCase())){
+				novaPlaylist.push(playlist[i]);
+			}
+		}
+		playlist = novaPlaylist;
+	}
+
+	function atualizarAnoLancamento(){
+		let musicaDigitada = inputTitulo.value;
+		let anoLancamento = Number(inputAnoLancamento.value);
+
+		for(let i = 0; i < playlist.length; i++){
+			if(playlist[i].titulo.toLowerCase().includes(musicaDigitada.toLowerCase())){
+				playlist[i].anoLancamento = anoLancamento;
+			}
+		}
+	}
+
+	function mediaAvaliacoes(){
+		let musicaDigitada = inputTitulo.value;
+		let media = 0;
+		let soma = 0;
+
+		for(let i = 0; i < playlist.length; i++){
+			if(playlist[i].titulo.toLowerCase().includes(musicaDigitada.toLowerCase())){
+				for(let j = 0; j < playlist[i].avaliacoes.length; j++){
+					soma = soma + playlist[i].avaliacoes[j];
+				}
+				media = soma / playlist[i].avaliacoes.length;
+			}
+		}
+		resultado.innerHTML = media;
+	}
+
+	function buscarBandaPorIntegrante(){
+		let integrante = inputIntegrante.value;
+		let mensagem = "";
+		for(let i = 0; i < playlist.length; i++){
+			for(let j = 0; j < playlist[i].integrantes.length; j++){
+				if(playlist[i].integrantes[j].toLowerCase().includes(integrante.toLowerCase())){
+					mensagem += playlist[i].banda;
+				}
+			}
+		}
+		resultado.innerHTML = mensagem;
+	}
+	</script>
+</html>
