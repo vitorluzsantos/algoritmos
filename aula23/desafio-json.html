@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>desafio json</title>
+	</head>
+	<body>
+		<!-- exercicio 1 -->
+		<button onclick="exibirAluno()">Exibir Aluno</button>
+
+		<!-- exercicio 2 -->
+		<button onclick="calcularPrecoProduto()">Calcular Preço Produto</button>
+
+		<!-- exercicio 3 -->
+		<button onclick="exibirCliente()">Exibir Cliente</button>
+
+		<!-- exercicio 4 -->
+		<input id="id_valor" placeholder="Digite o valor">
+		<button onclick="depositar()">Deposito</button>
+		<button onclick="sacar()">Sacar</button>
+
+		<!-- exercicio 5 -->
+		<button onclick="exibirContatos()">Exibir Contatos</button>
+
+		<!-- exercicio 6 -->
+		<button onclick="mediaDaTurma()">Media da Turma</button>
+
+		<!-- exercicio 7 -->
+		<input id="id_categoria" placeholder="Digite a categoria do produto">
+		<button onclick="filtrarProdutos()">Filtrar Produtos</button>
+
+		<!-- exercicio 8 -->
+		<button onclick="exibirCardapio()">Exibir Cardapio</button>
+
+		<div id="div_resultado"></div>
+	</body>
+	<script>
+	let aluno = {
+		"Nome":"Ana Silva",
+		"RA":1234567,
+		"Curso":"Ciências da computação",
+		"Semestre":1
+	};
+
+	function exibirAluno(){
+		div_resultado.innerHTML = 
+		` 
+			DADOS DO ALUNO
+			<br>Nome: ${aluno.Nome}
+			<br>RA: ${aluno.RA}
+			<br>Curso: ${aluno.Curso}
+			<br>Semestre: ${aluno.Semestre}
+		`
+	}
+
+	let produto = {
+		"nome":"Caderno",
+		"preco":15.00,
+		"quantidade":3
+	};
+
+	function calcularPrecoProduto(){
+		div_resultado.innerHTML = 
+			`
+			Produto: ${produto.nome} |
+			Preço: R$${produto.preco} | 
+			Quantidade: ${produto.quantidade} |
+			Total: R$${produto.preco * produto.quantidade} 
+			`;
+	}
+
+	let cliente = {
+		"nome":"pedrao",
+		"idade":18,
+		"endereco": {
+			"rua":"Rua Porto Novo",
+			"numero":54,
+			"cidade":"SP"
+		}
+	}
+
+	function exibirCliente(){
+		div_resultado.innerHTML = 
+		 `
+			<br>Nome: ${cliente.nome}
+			<br>Idade: ${cliente.idade}
+
+			<br>ENDERECO
+			<br>Rua: ${cliente.endereco.rua}
+			<br>Numero: ${cliente.endereco.numero}
+			<br>cidade: ${cliente.endereco.cidade}
+		`
+	}
+
+	let conta = {
+		"titular":"jucanalha",
+		"saldo":1000.00,
+		"banco":"Banco Safra"
+	};
+
+	function exibirSaldo(){
+		div_resultado.innerHTML = 
+			`
+			<br>DADOS DA CONTA DO JUCA
+			<br>Titular: ${conta.titular}
+			<br>Saldo: ${conta.saldo}
+			<br>Banco: ${conta.banco}
+			`
+	}
+
+	function sacar(){
+		let valorSaque = Number(id_valor.value);
+		conta.saldo = conta.saldo - valorSaque;
+		exibirSaldo();
+	}
+
+	function depositar(){
+		let valorDeposito = Number(id_valor.value);
+		conta.saldo = conta.saldo + valorDeposito;
+		exibirSaldo();
+	}
+
+	let contatos = [
+		{
+			"nome":"jucanalha",
+			"telefone":"11 98879-9477"
+		},
+		{
+			"nome":"caiao",
+			"telefone":"11 98879-9477"
+		},
+		{
+			"nome":"vitao",
+			"telefone":"11 98879-9477"
+		},
+		{
+			"nome":"jablobe",
+			"telefone":"11 98879-9477"
+		}
+	]
+
+	function exibirContatos(){
+		let mensagem;
+		for(let i = 0; i < contatos.length; i++){
+			mensagem += ` <br>Nome: ${contatos[i].nome} | Telefone: ${contatos[i].telefone} `;
+		}
+		div_resultado.innerHTML = mensagem;
+	}
+
+	let alunos = [
+		{
+			"nome":"canudo",
+			"nota":10
+		},
+		{
+			"nome":"jablobe",
+			"nota":9
+		},
+		{
+			"nome":"guigui",
+			"nota":6
+		},
+		{
+			"nome":"casulo",
+			"nota":7
+		},
+		{
+			"nome":"caslouco",
+			"nota":1
+		}
+	]; 
+
+	function mediaDaTurma(){
+		let soma = 0;
+		let maiorNota = 0;
+		let menorNota = alunos[0].nota;
+		let nomeAlunoNerd;
+		let nomeAlunoBurrinho;
+
+		for(let i = 0; i < alunos.length; i ++){
+			soma += alunos[i].nota;
+			if(maiorNota < alunos[i].nota){
+				maiorNota = alunos[i].nota;
+				nomeAlunoNerd = alunos[i].nome;
+			}
+
+			if(menorNota > alunos[i].nota){
+				menorNota = alunos[i].nota;
+				nomeAlunoBurrinho = alunos[i].nome;
+			}
+		}
+		let media = soma / alunos.length;
+
+		div_resultado.innerHTML = 
+			`
+			<br>Media da turma: ${media}
+			<br>Nome do aluno com maior nota: ${nomeAlunoNerd}
+			<br>Nome do aluno com menor nota: ${nomeAlunoBurrinho}
+			`;
+	}
+
+	let produtos = [
+		{
+			"nome":"caneta",
+			"categoria":"eletronico",
+			"preco":10
+		},
+		{
+			"nome":"miniatura do pedro",
+			"categoria":"eletronico",
+			"preco":10
+		},
+		{
+			"nome":"aviao a10",
+			"categoria":"aviacao",
+			"preco":10
+		},
+		{
+			"nome":"caneta",
+			"categoria":"legal",
+			"preco":10
+		},
+		{
+			"nome":"caneta",
+			"categoria":"legal",
+			"preco":10
+		},
+		{
+			"nome":"animatronic",
+			"categoria":"eletronico",
+			"preco":10
+		}
+	];
+
+	function filtrarProdutos(){
+		let categoriaDigitada = id_categoria.value;
+		let produtosFiltrados;
+		for(let i = 0; i < produtos.length; i++){
+			if(produtos[i].categoria == categoriaDigitada){
+				produtosFiltrados += 
+				`
+					<br>
+					<br>PRODUTO - ${i}
+					<br>Nome: ${produtos[i].nome}
+					<br>Preço: ${produtos[i].preco}
+					<br>
+				`
+			}
+		}
+		div_resultado.innerHTML = produtosFiltrados;
+	}
+
+	let cardapio =[
+		{
+			"nome":"arroz com frango",
+			"tipo":"principal",
+			"preco":1000.00
+		},
+		{
+			"nome":"xupi xupi",
+			"tipo":"entrada",
+			"preco":1.00
+		},
+		{
+			"nome":"xareu preto",
+			"tipo":"sobremesa",
+			"preco":50.00
+		},
+		{
+			"nome":"feijão na lata",
+			"tipo":"entrada",
+			"preco":25.00
+		},
+		{
+			"nome":"resenha",
+			"tipo":"principal",
+			"preco":99.00
+		}
+	];
+
+	function exibirCardapio(){
+		let pratosPrincipais = "";
+		let pratosEntrada = "";
+		let pratosSobremesa = "";
+		for(let i = 0; i < cardapio.length; i++){
+			if(cardapio[i].tipo == "principal"){
+				pratosPrincipais += 
+				`
+					<br>categoria - ${cardapio[i].tipo}  
+					<br>Nome: ${cardapio[i].nome}
+					<br>Preco: ${cardapio[i].preco}
+					<br>
+				`
+			}
+			else if(cardapio[i].tipo == "entrada"){
+				pratosEntrada += 
+				`
+					<br>categoria - ${cardapio[i].tipo}  
+					<br>Nome: ${cardapio[i].nome}
+					<br>Preco: ${cardapio[i].preco}
+					<br>
+				`
+			}
+			else if(cardapio[i].tipo == "sobremesa"){
+				pratosSobremesa += 
+				`
+					<br>categoria - ${cardapio[i].tipo}  
+					<br>Nome: ${cardapio[i].nome}
+					<br>Preco: ${cardapio[i].preco}
+					<br>
+				`
+			}
+		}
+		div_resultado.innerHTML = pratosSobremesa;
+		div_resultado.innerHTML += pratosEntrada;
+		div_resultado.innerHTML += pratosPrincipais;
+	}
+
+	</script>
+</html>
