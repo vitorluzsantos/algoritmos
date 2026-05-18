@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Via Cep</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="input-cep">
+			<input id="valor_cep">
+		</div>
+		<div class="btns-cep">
+			<button onclick="buscarCEP01()">Pesquisar 1</button>
+			<button onclick="buscarCEP02()">Pesquisar 2</button>
+		</div>
+	</body>
+	<script>
+	function buscarCEP01(){
+		let cep = valor_cep.value;
+		console.log("Teste 1: inicio");
+		let retornoAPI = fetch(`https://viacep.com.br/ws/${cep}/json/`)
+		.then((retornoPronto)=>{ /* primeiro converter o valor do objeto com .json */
+			return retornoPronto.json();
+		})
+		.then((retornoProntoConvertido)=>{
+			console.log("Teste 2: retorno agora sim: ", retornoProntoConvertido);
+		});
+		console.log("Teste 3: fim: ");
+	}
+
+	async function buscarCEP02(){ /* colocar o async antes do function para poder usar o await */
+		let cep = valor_cep.value;
+		console.log("Teste 1: inicio");
+		let retornoAPI = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+		let retornoProntoConvertido = await retornoAPI.json();
+		console.log("Teste 2: agora sim: ", retornoProntoConvertido);
+		console.log("Teste 3: fim");
+	}
+	</script>
+</html>
