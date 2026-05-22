@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartoon Tech</title>
+</head>
+
+<body>
+  <h2>Buscar Desenhos:</h2>
+
+  <span>Desenhos Cadastrados:</span>
+  <button onclick="exibirTodos()">Exibir Todos</button> <br>
+
+  <span>Nome:</span>
+  <input type="text" id="ipt_nome">
+  <button onclick="pesquisarPorNome()">Pesquisar por Nome</button><br>
+
+  <span>Ano:</span>
+  <select id="ipt_ano_parametro">
+    <option value="maior_igual">&gt;=</option>
+    <option value="igual">==</option>
+    <option value="menor_igual">&lt;=</option>
+  </select>
+  <input type="number" id="ipt_ano">
+  <button onclick="pesquisarPorAno()">Pesquisar por Ano</button><br>
+
+  <span>Episódio:</span>
+  <input type="text" id="ipt_episodio">
+  <button onclick="pesquisarPorEpisodio()">Pesquisar por Episódio</button> <br>
+
+  <span>Maior Doação:</span>
+  <button onclick="pesquisarMaiorDoacao()">Pesquisar Maior Doação</button><br>
+
+  <span>Resumo de Doações:</span>
+  <button onclick="exibirEstatisticasDoacoes()">Exibir Estatísticas</button><br>
+
+  <div id="div_resultado"></div>
+</body>
+
+</html>
+<script src="dados.js"></script>
+<script>
+	let listaSomaDoacoes = [];
+
+	function somaDoacoes(lista){
+		let soma = 0;
+		for(let i = 0; i < lista.length; i++){
+			soma += Number(lista[i].toFixed(2));
+		}
+		return soma.toFixed(2);
+	}
+
+	function exibirTodos(){
+		let mensagem = "";
+		for(let i = 0; i < desenhos.length; i++){
+			mensagem += 
+			`
+			<br>
+			Nome: ${desenhos[i].nome} | Criador: ${desenhos[i].criador} | Ano: ${desenhos[i].ano} <br>
+			Episodio: ${desenhos[i].episodios} <br>
+			Total Doado: ${somaDoacoes(desenhos[i].doacoes)} <br>
+			`
+		}
+		div_resultado.innerHTML = mensagem;
+	}
+
+	function pesquisarPorNome(){
+		let mensagem = "";
+		let nomeDigitado = ipt_nome.value.toLowerCase();
+
+		for(let i = 0; i < desenhos.length; i++){
+			if(desenhos[i].nome.toLowerCase().includes(nomeDigitado)){
+				mensagem += 
+				`
+				<br>
+				Nome: ${desenhos[i].nome} | Criador: ${desenhos[i].criador} | Ano: ${desenhos[i].ano} <br>
+				Episodio: ${desenhos[i].episodios} <br>
+				Total Doado: ${somaDoacoes(desenhos[i].doacoes)} <br>
+				`
+			}
+			div_resultado.innerHTML = mensagem;
+		}
+	}
+
+
+	function pesquisarPorAno(){
+		let anoDigitado = Number(ipt_ano.value);
+		let parametro = ipt_ano_parametro.value;
+		let mensagem = "";
+
+		if(parametro == "maior_igual"){
+			for(let i = 0; i < desenhos.length; i++){
+				if(desenhos[i].ano >= anoDigitado){
+					mensagem += 
+					`
+					<br>
+					Nome: ${desenhos[i].nome} | Criador: ${desenhos[i].criador} | Ano: ${desenhos[i].ano} <br>
+					Episodio: ${desenhos[i].episodios} <br>
+					Total Doado: ${somaDoacoes(desenhos[i].doacoes)} <br>
+					`
+				}
+			}
+		}
+		else if(parametro == "igual"){
+			for(let i = 0; i < desenhos.length; i++){
+				if(desenhos[i].ano == anoDigitado){
+					mensagem += 
+					`
+					${desenhos[i].nome} |
+					${desenhos[i].criador} | 
+					${desenhos[i].ano} |
+					${desenhos[i].episodios} |
+					${desenhos[i].doacoes} <br>
+					`
+				}
+			}
+		}
+		else if(parametro == "menor_igual"){
+			for(let i = 0; i < desenhos.length; i++){
+				if(desenhos[i].ano <= anoDigitado){
+					mensagem += 
+					`
+					${desenhos[i].nome} |
+					${desenhos[i].criador} | 
+					${desenhos[i].ano} |
+					${desenhos[i].episodios} |
+					${desenhos[i].doacoes} <br>
+					`
+				}
+			}
+		}
+		div_resultado.innerHTML = mensagem
+	}
+
+	function pesquisarPorEpisodio(){
+		let episodioDigitado = ipt_episodio.value.toLowerCase();
+		let mensagem = "";
+
+		for(let i = 0; i < desenhos.length[i]; i++){
+			for(let j = 0; j < desenhos[i].episodios.length; j++){
+				if(desenhos[i].episodios[j].toLowerCase().includes(episodioDigitado)){
+					mensagem += 
+					`
+					<br>
+					Nome: ${desenhos[i].nome} | Criador: ${desenhos[i].criador} | Ano: ${desenhos[i].ano} <br>
+					Episodio: ${desenhos[i].episodios} <br>
+					Total Doado: ${somaDoacoes(desenhos[i].doacoes)} <br>
+					`
+				}
+			}
+		}
+	}
+
+	function pesquisarMaiorDoacao(){
+		let soma = 0;
+		let objeto;
+		let indice = 0;
+
+		for(let i = 0; i < desenhos.length; i++){
+			soma = 0;
+			for(let j = 0; j < desenhos[i].doacoes.length; j++){
+				soma += desenhos[i].doacoes[j];
+			}
+			listaSomaDoacoes.push(Number(soma.toFixed(2)));
+		}
+
+		let maior = listaSomaDoacoes[0];
+		for(let i = 0; i < listaSomaDoacoes.length; i++){
+			if(listaSomaDoacoes[i] > maior){
+				maior = listaSomaDoacoes[i]
+				indice = i;
+			}
+		}
+		div_resultado.innerHTML = 
+		`
+		<br>
+		Nome: ${desenhos[indice].nome} | Criador: ${desenhos[indice].criador} | Ano: ${desenhos[indice].ano} <br>
+		Episodio: ${desenhos[indice].episodios} <br>
+		Total Doado: ${listaSomaDoacoes[indice]} <br>
+		`
+	}
+
+	function exibirEstatisticasDoacoes(){
+		let soma = 0;
+		let media = 0;
+		let contador = 0;
+
+		for(let i = 0; i < desenhos.length; i++){
+			for(let j = 0; j < desenhos[i].doacoes.length; j++){
+				soma += desenhos[i].doacoes[j];
+				contador ++
+			}
+		}
+
+		let somalegal = 0;
+		let objeto;
+		let indice = 0;
+
+		for(let i = 0; i < desenhos.length; i++){
+			somalegal = 0;
+			for(let j = 0; j < desenhos[i].doacoes.length; j++){
+				somalegal += desenhos[i].doacoes[j];
+			}
+			listaSomaDoacoes.push(Number(somalegal.toFixed(2)));
+		}
+
+		let maior = listaSomaDoacoes[0];
+		for(let i = 0; i < listaSomaDoacoes.length; i++){
+			if(listaSomaDoacoes[i] > maior){
+				maior = listaSomaDoacoes[i]
+				indice = i;
+			}
+		}
+		media = soma / contador;
+		div_resultado.innerHTML = `<br> Média de doações entre todos os desenhos: R$${media.toFixed(0)} <br> Desenho com mais doações: ${desenhos[indice].nome}`;
+	}
+
+
+</script>
