@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafio - FreeCell</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #0b5d1e;
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+
+    .controle-movimento {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .inputs-movimento {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .inputs-movimento input {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      width: 130px;
+      font-size: 14px;
+    }
+
+    .botao-movimentar {
+      padding: 10px 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 2px solid white;
+      background-color: white;
+      color: #0b5d1e;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .botao-movimentar:hover {
+      background-color: #0b5d1e;
+      color: white;
+      transform: scale(1.08);
+    }
+
+    .area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pilha {
+      width: 90px;
+      min-height: 120px;
+      border: 2px dashed rgba(255,255,255,0.5);
+      border-radius: 8px;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    .tabuleiro {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+    }
+
+    .coluna {
+      min-height: 500px;
+      border-radius: 8px;
+      padding: 5px;
+      background-color: rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .carta {
+      background-color: white;
+      color: black;
+      border-radius: 6px;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      border: 2px solid transparent;
+    }
+
+    .vermelho {
+      color: red;
+    }
+
+    .selecionada {
+      border-color: yellow;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Desafio - FreeCell</h1>
+
+  <div class="topo">
+
+    <div>
+      <h3>Áreas Auxiliares</h3>
+      <div class="area" id="auxiliares"></div>
+    </div>
+
+    <div class="controle-movimento">
+
+      <h3>Movimentar Carta</h3>
+
+      <div class="inputs-movimento">
+
+        <input id="origem" type="number" placeholder="Pilha origem" min="1">
+
+        <input id="destino" type="number" placeholder="Pilha destino" min="1">
+
+      </div>
+
+      <button class="botao-movimentar" onclick="movimentarViaInput()">
+        Movimentar
+      </button>
+
+    </div>
+
+    <div>
+      <h3>Pilhas Finais</h3>
+      <div class="area" id="finais"></div>
+    </div>
+
+  </div>
+
+  <div class="tabuleiro" id="tabuleiro"></div>
+
+  <div class="info" id="mensagem"></div>
+
+  <script>
+
+    // =====================================================
+    // LISTA DE CARTAS (JSON)
+    // =====================================================
+
+    const cartas = [
+      { valor: 'A', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '2', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '3', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '4', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '5', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '6', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '7', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '8', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: '9', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor:'10', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: 'J', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: 'Q', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+      { valor: 'K', naipe: 'copas', cor: 'vermelho', simbolo: '♥️' },
+
+      { valor: 'A', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '2', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '3', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '4', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '5', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '6', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '7', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '8', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: '9', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor:'10', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: 'J', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: 'Q', naipe: 'espadas', cor: 'preto', simbolo: '♠️' },
+      { valor: 'K', naipe: 'espadas', cor: 'preto', simbolo: '♠️' }
+    ];
+
+    // =====================================================
+    // MATRIZES / PILHAS DO JOGO
+    // =====================================================
+
+    const colunas = [[], [], [], [], [], [], [], []];
+    const auxiliares = [[], []];
+    const finais = [[], []];
+
+    let cartaSelecionada = null;
+
+    // =====================================================
+    // ORDEM DAS CARTAS (para validação)
+    // =====================================================
+
+    const ordem = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+    // =====================================================
+    // FUNÇÕES IMPLEMENTADAS
+    // =====================================================
+
+    function embaralharCartas() {
+      for (let i = cartas.length - 1; i > 0; i--) {
+        const indiceAleatorio = Math.floor(Math.random() * (i + 1));
+        const temp = cartas[i];
+        cartas[i] = cartas[indiceAleatorio];
+        cartas[indiceAleatorio] = temp;
+      }
+    }
+
+    function distribuirCartas() {
+      for (let i = 0; i < cartas.length; i++) {
+        const indiceColuna = i % colunas.length;
+        colunas[indiceColuna][colunas[indiceColuna].length] = cartas[i];
+      }
+    }
+
+    function validarMovimentoColuna(cartaOrigem, cartaDestino) {
+      const valorOrigem = ordem.indexOf(cartaOrigem.valor);
+      const valorDestino = ordem.indexOf(cartaDestino.valor);
+
+      if (valorDestino !== valorOrigem + 1) {
+        return false;
+      }
+      if (cartaOrigem.cor === cartaDestino.cor) {
+        return false;
+      }
+
+      return true;
+    }
+
+    function validarMovimentoFinal(cartaOrigem, pilhaFinal) {
+      if (pilhaFinal.length === 0) {
+        return cartaOrigem.valor === 'A';
+      }
+
+      const cartaTopo = pilhaFinal[pilhaFinal.length - 1];
+      if (cartaOrigem.naipe !== cartaTopo.naipe) {
+        return false;
+      }
+
+      const valorOrigem = ordem.indexOf(cartaOrigem.valor);
+      const valorTopo = ordem.indexOf(cartaTopo.valor);
+
+      return valorOrigem === valorTopo + 1;
+    }
+
+    function validarMovimentoAuxiliar(indiceDestino) {
+      return auxiliares[indiceDestino].length === 0;
+    }
+
+    function movimentarViaInput() {
+      const inputOrigem = document.getElementById('origem').value;
+      const inputDestino = document.getElementById('destino').value;
+
+      if (!inputOrigem || !inputDestino) {
+        alert('Preencha os campos de origem e destino!');
+        return;
+      }
+
+      const origem = Number(inputOrigem);
+      const destino = Number(inputDestino);
+
+      selecionarOrigem(origem);
+
+      if (cartaSelecionada === null) {
+        alert('Pilha de origem inválida ou vazia!');
+        return;
+      }
+
+      moverDestino(destino);
+    }
+
+    function selecionarOrigem(numero) {
+      cartaSelecionada = null;
+
+      if (numero >= 1 && numero <= 8) {
+        const indice = numero - 1;
+        if (colunas[indice].length === 0) return;
+
+        const carta = colunas[indice][colunas[indice].length - 1];
+        cartaSelecionada = { tipo: 'coluna', indice, carta };
+        return;
+      }
+
+      if (numero >= 9 && numero <= 10) {
+        const indice = numero - 9;
+        if (auxiliares[indice].length === 0) return;
+
+        const carta = auxiliares[indice][0];
+        cartaSelecionada = { tipo: 'auxiliar', indice, carta };
+        return;
+      }
+    }
+
+    function moverDestino(numero) {
+      if (numero >= 1 && numero <= 8) {
+        moverParaColuna(numero - 1);
+        return;
+      }
+
+      if (numero >= 9 && numero <= 10) {
+        moverParaAuxiliar(numero - 9);
+        return;
+      }
+
+      if (numero >= 11 && numero <= 12) {
+        moverParaFinal(numero - 11);
+        return;
+      }
+
+      alert('Número de destino inválido! Use 1–8 (colunas), 9–10 (auxiliares) ou 11–12 (finais).');
+    }
+
+    function removerCartaSelecionada() {
+      if (cartaSelecionada.tipo === 'coluna') {
+        const pilha = colunas[cartaSelecionada.indice];
+        const carta = pilha[pilha.length - 1];
+        pilha.length = pilha.length - 1;
+        return carta;
+      }
+
+      if (cartaSelecionada.tipo === 'auxiliar') {
+        const pilha = auxiliares[cartaSelecionada.indice];
+        const carta = pilha[0];
+        pilha.length = 0;
+        return carta;
+      }
+    }
+
+    function moverParaColuna(indiceDestino) {
+      const colunaDestino = colunas[indiceDestino];
+      const carta = cartaSelecionada.carta;
+
+      if (colunaDestino.length > 0) {
+        const cartaTopo = colunaDestino[colunaDestino.length - 1];
+        if (!validarMovimentoColuna(carta, cartaTopo)) {
+          alert('Movimento inválido! A carta deve ser de cor diferente e valor imediatamente inferior.');
+          return;
+        }
+      }
+
+      const cartaRemovida = removerCartaSelecionada();
+      colunaDestino[colunaDestino.length] = cartaRemovida;
+      finalizarMovimento();
+    }
+
+    function moverParaAuxiliar(indiceDestino) {
+      if (!validarMovimentoAuxiliar(indiceDestino)) {
+        alert('Pilha auxiliar já está ocupada!');
+        return;
+      }
+
+      const cartaRemovida = removerCartaSelecionada();
+      auxiliares[indiceDestino][0] = cartaRemovida;
+      finalizarMovimento();
+    }
+
+    function moverParaFinal(indiceDestino) {
+      const pilhaFinal = finais[indiceDestino];
+      const carta = cartaSelecionada.carta;
+
+      if (!validarMovimentoFinal(carta, pilhaFinal)) {
+        alert('Movimento inválido! A pilha final deve começar com Ás e seguir ordem crescente do mesmo naipe.');
+        return;
+      }
+
+      const cartaRemovida = removerCartaSelecionada();
+      pilhaFinal[pilhaFinal.length] = cartaRemovida;
+      finalizarMovimento();
+    }
+
+    function verificarVitoria() {
+      let totalCartas = 0;
+      for (let i = 0; i < finais.length; i++) {
+        totalCartas = totalCartas + finais[i].length;
+      }
+      if (totalCartas === cartas.length) {
+        mostrarMensagem('🎉 Parabéns! Você venceu!');
+        alert('🎉 Parabéns! Você venceu!');
+      }
+    }
+
+    // =====================================================
+    // FUNÇÕES JÁ PRONTAS
+    // =====================================================
+
+    function obterNumeroPilha(tipo, indice) {
+
+      if(tipo === 'coluna') {
+        return indice + 1;
+      }
+
+      if(tipo === 'auxiliar') {
+        return 9 + indice;
+      }
+
+      if(tipo === 'final') {
+        return 11 + indice;
+      }
+    }
+
+
+    function renderizar() {
+
+      const tabuleiro = document.getElementById('tabuleiro');
+      tabuleiro.innerHTML = '';
+
+      for(let i = 0; i < colunas.length; i++) {
+
+        const colunaDiv = document.createElement('div');
+        colunaDiv.className = 'coluna';
+
+        const titulo = document.createElement('h4');
+        titulo.innerText = `Pilha ${obterNumeroPilha('coluna', i)}`;
+        titulo.style.marginBottom = '10px';
+
+        colunaDiv.appendChild(titulo);
+
+        colunaDiv.onclick = () => clicarColuna(i);
+
+        for(let j = 0; j < colunas[i].length; j++) {
+
+          const carta = colunas[i][j];
+
+          const cartaDiv = document.createElement('div');
+          cartaDiv.className = `carta ${carta.cor === 'vermelho' ? 'vermelho' : ''}`;
+
+          cartaDiv.innerText = `${carta.valor} ${carta.simbolo}`;
+
+          colunaDiv.appendChild(cartaDiv);
+        }
+
+        tabuleiro.appendChild(colunaDiv);
+      }
+
+      renderizarAuxiliares();
+      renderizarFinais();
+    }
+
+
+    function renderizarAuxiliares() {
+
+      const container = document.getElementById('auxiliares');
+      container.innerHTML = '';
+
+      for(let i = 0; i < auxiliares.length; i++) {
+
+        const pilha = document.createElement('div');
+        pilha.className = 'pilha';
+
+        const titulo = document.createElement('h4');
+        titulo.innerText = `Pilha ${obterNumeroPilha('auxiliar', i)}`;
+        titulo.style.marginBottom = '10px';
+
+        pilha.appendChild(titulo);
+
+        if(auxiliares[i][0]) {
+
+          const carta = auxiliares[i][0];
+
+          const cartaDiv = document.createElement('div');
+          cartaDiv.className = `carta ${carta.cor === 'vermelho' ? 'vermelho' : ''}`;
+
+          cartaDiv.innerText = `${carta.valor} ${carta.simbolo}`;
+
+          pilha.appendChild(cartaDiv);
+        }
+
+        container.appendChild(pilha);
+      }
+    }
+
+
+    function renderizarFinais() {
+
+      const container = document.getElementById('finais');
+      container.innerHTML = '';
+
+      for(let i = 0; i < finais.length; i++) {
+
+        const pilha = document.createElement('div');
+        pilha.className = 'pilha';
+
+        const titulo = document.createElement('h4');
+        titulo.innerText = `Pilha ${obterNumeroPilha('final', i)}`;
+        titulo.style.marginBottom = '10px';
+
+        pilha.appendChild(titulo);
+
+        if(finais[i].length > 0) {
+
+          const carta = finais[i][finais[i].length - 1];
+
+          const cartaDiv = document.createElement('div');
+          cartaDiv.className = `carta ${carta.cor === 'vermelho' ? 'vermelho' : ''}`;
+
+          cartaDiv.innerText = `${carta.valor} ${carta.simbolo}`;
+
+          pilha.appendChild(cartaDiv);
+        }
+
+        container.appendChild(pilha);
+      }
+    }
+
+    function finalizarMovimento() {
+
+      cartaSelecionada = null;
+
+      renderizar();
+
+      verificarVitoria();
+    }
+
+
+    function mostrarMensagem(texto) {
+      document.getElementById('mensagem').innerText = texto;
+    }
+
+
+    // =====================================================
+    // INICIALIZAÇÃO
+    // =====================================================
+
+    embaralharCartas();
+    distribuirCartas();
+    renderizar();
+
+  </script>
+</body>
+</html>
